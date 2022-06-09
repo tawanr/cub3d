@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 21:03:41 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 01:04:41 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:39:02 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	calc_ray(t_gamevars *gamevars)
 	double		ray_x;
 	double		ray_y;
 	t_player	*p;
-	double		distance;
 
 	p = gamevars->player;
 	x = 0;
@@ -28,14 +27,8 @@ void	calc_ray(t_gamevars *gamevars)
 		cam = 2 * x / (double)WWIDTH - 1;
 		ray_x = p->dir_x + p->cam_x * cam;
 		ray_y = p->dir_y + p->cam_y * cam;
-		distance = wall_distance(gamevars, ray_x, ray_y);
-		// printf("cam: %f ray_x: %f\n", cam, ray_x);
-		draw_wall_col(gamevars, x, distance);
-		// printf("drawing x: %d distance: %f\n", x, distance);
-		// draw_wall_col(gamevars, x, wall_distance(gamevars, ray_x, ray_y));
-		// mlx_put_image_to_window(gamevars->mlx, gamevars->mlx_win, gamevars->img->img, 0, 0);
+		draw_wall_col(gamevars, x, wall_distance(gamevars, ray_x, ray_y));
 		x++;
-		// usleep(20000);
 	}
 }
 
@@ -43,7 +36,6 @@ double	wall_distance(t_gamevars *gamevars, double ray_x, double ray_y)
 {
 	t_ray	ray;
 
-	// printf("ray_x: %f ray_y: %f\n", ray_x, ray_y);
 	ray.stepX = 0;
 	ray.stepY = 0;
 	ray.sideDistX = 0;
@@ -92,14 +84,11 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 	int	side;
 	int	map_x;
 	int	map_y;
-	int	hit;
 
 	side = 0;
-	hit = 0;
 	map_x = (int)gamevars->player->pos_x;
 	map_y = (int)gamevars->player->pos_y;
-	// printf("stepx: %d stepy: %d\n", ray->stepX, ray->stepY);
-	while (hit == 0)
+	while (gamevars->map.map[map_y][map_x] == 0)
 	{
 		if (ray->sideDistX < ray->sideDistY)
 		{
@@ -113,13 +102,7 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 			map_y += ray->stepY;
 			side = 1;
 		}
-		if (gamevars->map.map[map_y][map_x] > 0)
-			hit = 1;
 	}
-	// printf("hit mapx: %d mapy: %d\n", map_x, map_y);
-	// map_ray(gamevars, ray);
-	// printf("distx: %f disty: %f\n", ray->sideDistX, ray->sideDistY);
-	// printf("deltax: %f deltay: %f\n", ray->deltaDistX, ray->deltaDistY);
 	return (get_distance(ray, side));
 }
 

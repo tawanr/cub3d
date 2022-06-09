@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 01:58:54 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:34:01 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	inithooks(void *mlx_win, t_gamevars *gamevars)
 	mlx_hook(mlx_win, 6, 1L << 6, mouserot, gamevars);
 	mlx_hook(mlx_win, 4, 1L << 2, mousectl, gamevars);
 	mlx_hook(mlx_win, 5, 1L << 3, mouserel, gamevars);
+	mlx_hook(mlx_win, 17, 1L << 17, end_win, gamevars);
 	mlx_loop_hook(gamevars->mlx, drawframe, gamevars);
 }
 

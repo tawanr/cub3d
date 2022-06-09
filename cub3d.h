@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 01:48:31 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:38:38 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,8 @@ void	pixel_put(t_data *data, int x, int y, int color);
 void	draw_wall_col(t_gamevars *gamevars, int x, double distance);
 void	draw_ceiling(t_gamevars *gamevars);
 void	draw_floor(t_gamevars *gamevars);
+
+// Cleanup
+int		end_win(t_gamevars *gamevars);
 
 #endif

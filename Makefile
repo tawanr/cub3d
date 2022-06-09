@@ -1,4 +1,4 @@
-SRCS = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c 
+SRCS = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c cub3d_clean.c
 #cub3d_map.c
 
 OBJS = $(SRCS:.c=.o)
