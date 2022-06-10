@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 21:03:41 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:39:02 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:48:58 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ double	wall_distance(t_gamevars *gamevars, double ray_x, double ray_y)
 {
 	t_ray	ray;
 
-	ray.stepX = 0;
-	ray.stepY = 0;
-	ray.sideDistX = 0;
-	ray.sideDistY = 0;
+	ray.step_x = 0;
+	ray.step_y = 0;
+	ray.side_dx = 0;
+	ray.side_dy = 0;
 	if (ray_x == 0)
-		ray.deltaDistX = 1e30;
+		ray.delta_x = 1e30;
 	else
-		ray.deltaDistX = fabs(1.0 / ray_x);
+		ray.delta_x = fabs(1.0 / ray_x);
 	if (ray_y == 0)
-		ray.deltaDistY = 1e30;
+		ray.delta_y = 1e30;
 	else
-		ray.deltaDistY = fabs(1.0 / ray_y);
+		ray.delta_y = fabs(1.0 / ray_y);
 	calc_sidedist(gamevars, &ray, ray_x, ray_y);
 	return (dda(gamevars, &ray));
 }
@@ -59,23 +59,23 @@ void	calc_sidedist(t_gamevars *gamevars, t_ray *ray, double ray_x, double ray_y)
 	p = gamevars->player;
 	if (ray_x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (p->pos_x - (int)p->pos_x) * ray->deltaDistX;
+		ray->step_x = -1;
+		ray->side_dx = (p->pos_x - (int)p->pos_x) * ray->delta_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = ((int)p->pos_x + 1.0 - p->pos_x) * ray->deltaDistX;
+		ray->step_x = 1;
+		ray->side_dx = ((int)p->pos_x + 1.0 - p->pos_x) * ray->delta_x;
 	}
 	if (ray_y < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (p->pos_y - (int)p->pos_y) * ray->deltaDistY;
+		ray->step_y = -1;
+		ray->side_dy = (p->pos_y - (int)p->pos_y) * ray->delta_y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = ((int)p->pos_y + 1.0 - p->pos_y) * ray->deltaDistY;
+		ray->step_y = 1;
+		ray->side_dy = ((int)p->pos_y + 1.0 - p->pos_y) * ray->delta_y;
 	}
 }
 
@@ -90,16 +90,16 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 	map_y = (int)gamevars->player->pos_y;
 	while (gamevars->map.map[map_y][map_x] == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dx < ray->side_dy)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			map_x += ray->stepX;
+			ray->side_dx += ray->delta_x;
+			map_x += ray->step_x;
 			side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			map_y += ray->stepY;
+			ray->side_dy += ray->delta_y;
+			map_y += ray->step_y;
 			side = 1;
 		}
 	}
@@ -109,7 +109,7 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 double	get_distance(t_ray *ray, int side)
 {
 	if (side == 0)
-		return (ray->sideDistX - ray->deltaDistX);
+		return (ray->side_dx - ray->delta_x);
 	else
-		return (ray->sideDistY - ray->deltaDistY);
+		return (ray->side_dy - ray->delta_y);
 }

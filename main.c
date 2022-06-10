@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:13:44 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 07:41:14 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w)
 	mx = 0;
 	my = 0;
 	map = gamevars->map.map;
-	while (my <= 5)
+	while (my <= MHEIGHT)
 	{
-		while (mx <= 6)
+		while (mx <= MWIDTH)
 		{
 			dx = off_w + (mx * scale);
 			dy = off_h + (my * scale);
@@ -81,7 +81,7 @@ void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w)
 				while (dx < off_w + ((mx + 1) * scale) && dx < WWIDTH)
 					pixel_put(gamevars->img, dx++, dy, 0x00FFFFFF);
 			dx = off_w + (mx * scale);
-			if (my < 5)
+			if (my < MHEIGHT)
 			{
 				while (dy < off_h + ((my + 1) * scale) && dy < WHEIGHT)
 				{
@@ -131,7 +131,7 @@ int	main(void)
 	t_input		input;
 
 	gamevars.mlx = mlx_init();
-	gamevars.mlx_win = mlx_new_window(gamevars.mlx, 800, 600, "cub3d");
+	gamevars.mlx_win = mlx_new_window(gamevars.mlx, WWIDTH, WHEIGHT, "cub3d");
 	img.img = mlx_new_image(gamevars.mlx, WWIDTH, WHEIGHT);
 	gamevars.img = &img;
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.linelen, &img.endian);
@@ -143,7 +143,5 @@ int	main(void)
 	input.rmouse_pressed = 0;
 	gamevars.input = &input;
 	inithooks(gamevars.mlx_win, &gamevars);
-	// draw_map(&gamevars);
-	// mlx_put_image_to_window(gamevars.mlx, gamevars.mlx_win, img.img, 0, 0);
 	mlx_loop(gamevars.mlx);
 }

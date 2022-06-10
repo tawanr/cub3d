@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:46:20 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:26:50 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 15:27:41 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	mouserot(int x, int y, t_gamevars *gamevars)
 	{
 		player_rotate(gamevars, 0.1 * (x - gamevars->input->mouse_x));
 		mlx_mouse_hide(gamevars->mlx, gamevars->mlx_win);
-		mlx_mouse_move(gamevars->mlx, gamevars->mlx_win, WWIDTH / 2, WHEIGHT / 2);
+		// mlx_mouse_move(gamevars->mlx, gamevars->mlx_win, WWIDTH / 2, WHEIGHT / 2);
 		gamevars->input->mouse_x = x;
 		gamevars->input->mouse_y = y;
 	}
@@ -66,5 +66,7 @@ int	keymod(int keycode, t_gamevars *gamevars)
 		player_rotate(gamevars, -1);
 	else if (keycode == 101)
 		player_rotate(gamevars, 1);
+	else if (keycode == 65307)
+		end_win(gamevars);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:38:38 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:56:33 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 # include <unistd.h>
 # include "mlx.h"
 
-# define WWIDTH 800
-# define WHEIGHT 600
+# define WWIDTH 1600
+# define WHEIGHT 900
 # define MWIDTH 6
 # define MHEIGHT 5
 # define MAPSIZE 150
 
 typedef struct s_ray
 {
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	int		stepX;
-	int		stepY;
+	double	side_dx;
+	double	side_dy;
+	double	delta_x;
+	double	delta_y;
+	int		step_x;
+	int		step_y;
 }	t_ray;
 
 typedef struct s_data
@@ -74,7 +74,7 @@ typedef struct s_input
 {
 	int	mouse_pressed;
 	int	rmouse_pressed;
-	int mouse_x;
+	int	mouse_x;
 	int	mouse_y;
 }	t_input;
 
