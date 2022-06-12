@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 02:34:12 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:38:15 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/11 14:37:35 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	end_win(t_gamevars *gamevars)
 	mlx_destroy_image(gamevars->mlx, gamevars->img->img);
 	mlx_clear_window(gamevars->mlx, gamevars->mlx_win);
 	mlx_destroy_window(gamevars->mlx, gamevars->mlx_win);
-	mlx_destroy_display(gamevars->mlx);
+	// mlx_destroy_display(gamevars->mlx);
 	free(gamevars->mlx);
 	exit(0);
 }

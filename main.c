@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 07:41:14 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:34:24 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.linelen, &img.endian);
 	init_player(&player);
 	init_minimap(&minimap);
+	texture_load(&gamevars);
 	gamevars.player = &player;
 	gamevars.map.map = init_map();
 	gamevars.minimap = &minimap;

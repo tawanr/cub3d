@@ -1,10 +1,10 @@
-SRCS = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c cub3d_clean.c
+SRCS = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c cub3d_clean.c cub3d_texture.c
 #cub3d_map.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc -Ilibft -Imlx
-CFLAGS = -Wextra -Wall -Werror -Ilibft -Iminilibx-linux -I/usr/include -O3
+CFLAGS = -Wextra -Wall -Werror -Ilibft -Iminilibx -I/usr/include
 
 NAME = cub3d
 INCLUDES = ./libft
@@ -16,12 +16,12 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./libft
-	$(MAKE) -C ./minilibx-linux
-	$(CC) $(OBJS) -lm -Llibft -lft -Lminilibx-linux -lmlx -L/usr/lib -Iminilibx-linux -lXext -lX11 -lm -lz -o $(NAME) -Ilibft
+	$(MAKE) -C ./minilibx
+	$(CC) $(OBJS) -lm -Llibft -lft -Lminilibx -lmlx -L/usr/lib -Iminilibx -framework OpenGL -framework AppKit -o $(NAME) -Ilibft
 
 clean:
 	$(MAKE) clean -C ./libft
-	$(MAKE) clean -C ./minilibx-linux
+	$(MAKE) clean -C ./minilibx
 	rm -rf *.o
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:56:33 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:05:52 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,20 @@
 
 typedef struct s_ray
 {
+	double	ray_x;
+	double	ray_y;
 	double	side_dx;
 	double	side_dy;
 	double	delta_x;
 	double	delta_y;
 	int		step_x;
 	int		step_y;
+	int		count_x;
+	int		count_y;
+	double	init_y;
+	double	init_x;
+	double	tex_offset;
+	double	distance;
 }	t_ray;
 
 typedef struct s_data
@@ -78,6 +86,13 @@ typedef struct s_input
 	int	mouse_y;
 }	t_input;
 
+typedef struct s_texture
+{
+	int		width;
+	int		height;
+	t_data	*img;
+}	t_texture;
+
 typedef struct s_gamevars
 {
 	int			scale;
@@ -88,6 +103,8 @@ typedef struct s_gamevars
 	t_player	*player;
 	t_minimap	*minimap;
 	t_input		*input;
+	t_texture	*textures;
+	int			tex_count;
 }	t_gamevars;
 
 void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w);
@@ -112,16 +129,19 @@ void	player_rotate(t_gamevars *gamevars, int dir);
 
 // Camera calculations
 void	calc_ray(t_gamevars *gamevars);
-double	wall_distance(t_gamevars *gamevars, double ray_x, double ray_y);
-void	calc_sidedist(t_gamevars *gamevars, t_ray *ray, double ray_x, double ray_y);
+double	wall_distance(t_gamevars *gamevars, t_ray *ray);
+void	calc_sidedist(t_gamevars *gamevars, t_ray *ray);
 double	dda(t_gamevars *gamevars, t_ray *ray);
-double	get_distance(t_ray *ray, int side);
+double	get_distance(t_gamevars *gamevars, t_ray *ray, int side);
 
 // Draw calls
 void	pixel_put(t_data *data, int x, int y, int color);
-void	draw_wall_col(t_gamevars *gamevars, int x, double distance);
+void	draw_wall_col(t_gamevars *gamevars, int x, t_ray *ray);
 void	draw_ceiling(t_gamevars *gamevars);
 void	draw_floor(t_gamevars *gamevars);
+
+// Texture handling
+int		texture_load(t_gamevars *gamevars);
 
 // Cleanup
 int		end_win(t_gamevars *gamevars);
