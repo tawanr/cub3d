@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 01:17:24 by tratanat          #+#    #+#             */
-/*   Updated: 2022/03/05 01:00:30 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:07:38 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int			ft_lstsize(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			getdigit(long int n);
 long int	ft_abs(long int n);
+int			ft_strcmp(const char *s1, const char *s2);
 
 #endif
