@@ -6,11 +6,12 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:41:09 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 20:27:21 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/02 22:52:35 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 #include "preprocess.h"
 
 static void	cub_init(t_cub *cub)
@@ -36,6 +37,8 @@ static void	read_map(char *line, int fd, t_cub *cub)
 	{
 		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			map_error(cub, "Missing map");
 	}
 	cub->map = (t_map *)malloc(sizeof(t_map) * 1);
 	cub->map->map = NULL;
