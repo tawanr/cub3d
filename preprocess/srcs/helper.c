@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:26:45 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 17:47:21 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:45:08 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_map(t_map *map)
 		return ;
 	}
 	i = 0;
-	while (map->map[i])
+	while (i < map->height)
 	{
 		free(map->map[i++]);
 	}

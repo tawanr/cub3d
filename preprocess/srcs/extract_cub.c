@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:41:09 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 17:18:44 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/02 20:27:21 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static int	read_cub(int fd, t_cub *cub)
 		line = get_next_line(fd);
 	}
 	read_map(line, fd, cub);
-	if (complete_check(cub) == 0)
+	refine_map(cub->map);
+	if (validate_cub(cub) == 0)
 		return (0);
 	return (1);
 }
@@ -88,6 +89,7 @@ t_cub	*extract_cub(int fd)
 	close(fd);
 	if (status == 0)
 	{
+		ft_putendl_fd("Error\nInvalid cub", 2);
 		free_cub(cub);
 		exit(EXIT_FAILURE);
 	}

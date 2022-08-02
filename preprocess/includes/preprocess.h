@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 17:21:23 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:34:42 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ enum
 
 enum
 {
-	N = 2,
-	S = 3,
-	W = 4,
-	E = 5,
-	SPACE = 6,
+	EMPTY,
+	WALL,
+	N,
+	S,
+	W,
+	E,
+	SPACE,
+	CHECK,
 	END = 9
 };
 
@@ -77,7 +80,11 @@ int		intarray_len(int *array[]);
 void	dup_map(int **new_map, int **old_map);
 void	add_map(char *line, t_cub *cub, int *i, int *flag);
 
+// Refine map
+void	refine_map(t_map *map);
+
 // Helper
+void	free_map(t_map *map);
 void	free_cub(t_cub *cub);
 int		strarray_len(char *array[]);
 void	free_strarray(char *array[]);
@@ -86,8 +93,9 @@ void	map_error(t_cub *cub, char *msg);
 // Split Space
 char	**split_space(char *s);
 
-// Complete check
+// Validate cub
 int		map_start(t_cub *cub);
-int		complete_check(t_cub *cub);
+int		validate_cub(t_cub *cub);
+int		check_close_map(t_map *map, int i, int j);
 
 #endif

@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complete_check.c                                   :+:      :+:    :+:   */
+/*   refine_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 15:26:16 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 17:21:11 by spoolpra         ###   ########.fr       */
+/*   Created: 2022/08/02 20:00:12 by spoolpra          #+#    #+#             */
+/*   Updated: 2022/08/02 20:18:16 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "preprocess.h"
 
-int	map_start(t_cub *cub)
+static void	resize_map_line(int **map_line, int width)
 {
-	if (!cub->north)
-		return (0);
-	if (!cub->south)
-		return (0);
-	if (!cub->west)
-		return (0);
-	if (!cub->east)
-		return (0);
-	if (!cub->floor)
-		return (0);
-	if (!cub->ceiling)
-		return (0);
-	return (1);
+	int	i;
+	int	*new_map_line;
+
+	i = 0;
+	new_map_line = (int *)malloc(sizeof(int) * width);
+	while ((*map_line)[i] != END)
+	{
+		new_map_line[i] = (*map_line)[i];
+		i++;
+	}
+	while (i < width)
+	{
+		new_map_line[i] = SPACE;
+		i++;
+	}
+	free(*map_line);
+	*map_line = new_map_line;
 }
 
-int	complete_check(t_cub *cub)
+void	refine_map(t_map *map)
 {
-	if (!map_start(cub))
-		return (0);
-	if (!cub->map || !cub->map->map)
-		return (0);
-	return (1);
+	int	i;
+
+	i = 0;
+	while (i < map->height)
+	{
+		resize_map_line(&map->map[i++], map->width);
+	}
 }

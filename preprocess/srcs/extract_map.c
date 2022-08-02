@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:50:04 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 17:47:25 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/02 20:03:27 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@ static int	assign_val(char c, int *flag)
 {
 	if (c == 'N')
 	{
-		*flag = *flag + P_FLAG;
+		*flag = *flag | P_FLAG;
 		return (N);
 	}
 	else if (c == 'S')
 	{
-		*flag = *flag + P_FLAG;
+		*flag = *flag | P_FLAG;
 		return (S);
 	}
 	else if (c == 'W')
 	{
-		*flag = *flag + P_FLAG;
+		*flag = *flag | P_FLAG;
 		return (W);
 	}
 	else if (c == 'E')
 	{
-		*flag = *flag + P_FLAG;
+		*flag = *flag | P_FLAG;
 		return (E);
 	}
 	else if (c == '1')
@@ -63,7 +63,7 @@ int	*get_map_line(char *l, t_cub *cub, int *flag)
 	{
 		if (l[i] == 'N' || l[i] == 'S' || l[i] == 'W' || l[i] == 'E')
 		{
-			if (!((*flag) | P_FLAG))
+			if (*flag & P_FLAG)
 				error_map(l, cub, "Duplicate player", map_line);
 			map_line[i] = assign_val(l[i], flag);
 		}
@@ -104,7 +104,7 @@ void	add_map(char *line, t_cub *cub, int *i, int *flag)
 
 	if (line[0] == '\n')
 	{
-		*flag = *flag + SEP_FLAG;
+		*flag = *flag | SEP_FLAG;
 		free(line);
 		return ;
 	}
@@ -113,7 +113,7 @@ void	add_map(char *line, t_cub *cub, int *i, int *flag)
 	width = ft_strlen(l_trim);
 	if (width > cub->map->width)
 		cub->map->width = width;
-	if (!((*flag) | SEP_FLAG))
+	if (*flag & SEP_FLAG)
 		error_map(l_trim, cub, "Map seperate by newline", NULL);
 	map_line = get_map_line(l_trim, cub, flag);
 	free(l_trim);
