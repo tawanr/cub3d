@@ -3,33 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 14:44:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/03/05 01:03:08 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/02 13:38:34 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "get_next_line.h"
-
-void	ft_bzero(char *buffer, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-		buffer[i++] = 0;
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*str++)
-		i++;
-	return (i);
-}
 
 char	*ft_strnjoin(char *dst, char *src, int n)
 {
