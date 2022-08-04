@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 21:34:42 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 21:47:23 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ enum
 {
 	EMPTY,
 	WALL,
-	N,
-	S,
-	W,
-	E,
 	SPACE,
 	CHECK,
 	END = 9
@@ -55,15 +51,23 @@ typedef struct s_map
 	int	width;
 }	t_map;
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	dir;
+}	t_player;
+
 typedef struct s_cub
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	t_rgb	*floor;
-	t_rgb	*ceiling;
-	t_map	*map;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	t_rgb		*floor;
+	t_rgb		*ceiling;
+	t_map		*map;
+	t_player	*player;
 }	t_cub;
 
 // Preprocess
@@ -79,6 +83,7 @@ void	add_cub_wall(t_cub *cub, char *array[]);
 int		intarray_len(int *array[]);
 void	dup_map(int **new_map, int **old_map);
 void	add_map(char *line, t_cub *cub, int *i, int *flag);
+void	assign_player(t_cub *cub, int x, int y, char dir);
 
 // Refine map
 void	refine_map(t_map *map);

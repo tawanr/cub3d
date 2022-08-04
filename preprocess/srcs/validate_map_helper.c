@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 21:14:55 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 21:28:15 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 21:52:37 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	check_left(t_map *map, int i, int j)
 		return (0);
 	if (checking == EMPTY)
 		return (check_close_map(map, i, j - 1));
-	if (checking >= N && checking <= E)
-		return (check_close_map(map, i, j - 1));
 	return (1);
 }
 
@@ -39,8 +37,6 @@ int	check_low(t_map *map, int i, int j)
 	if (checking == SPACE)
 		return (0);
 	if (checking == EMPTY)
-		return (check_close_map(map, i + 1, j));
-	if (checking >= N && checking <= E)
 		return (check_close_map(map, i + 1, j));
 	return (1);
 }
@@ -56,8 +52,6 @@ int	check_low_right(t_map *map, int i, int j)
 		return (0);
 	if (checking == EMPTY)
 		return (check_close_map(map, i + 1, j + 1));
-	if (checking >= N && checking <= E)
-		return (check_close_map(map, i + 1, j + 1));
 	return (1);
 }
 
@@ -71,8 +65,6 @@ int	check_low_left(t_map *map, int i, int j)
 	if (checking == SPACE)
 		return (0);
 	if (checking == EMPTY)
-		return (check_close_map(map, i + 1, j - 1));
-	if (checking >= N && checking <= E)
 		return (check_close_map(map, i + 1, j - 1));
 	return (1);
 }
