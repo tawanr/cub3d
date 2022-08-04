@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:41:09 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 21:40:54 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:45:12 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	cub_init(t_cub *cub)
 
 static void	read_map(char *line, int fd, t_cub *cub)
 {
-	int	i;
 	int	flag;
 
 	flag = 0;
@@ -45,13 +44,11 @@ static void	read_map(char *line, int fd, t_cub *cub)
 	cub->map->map = NULL;
 	cub->map->height = 0;
 	cub->map->width = 0;
-	i = 0;
 	while (line)
 	{
-		add_map(line, cub, &i, &flag);
+		add_map(line, cub, &flag);
 		line = get_next_line(fd);
 	}
-	cub->map->height = i;
 }
 
 static int	read_cub(int fd, t_cub *cub)

@@ -6,17 +6,16 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:50:04 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 21:49:36 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:43:48 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "preprocess.h"
-#include <stdio.h>
 
 static void	error_map(char *line, t_cub *cub, char *msg, int *map_line)
 {
-	if (map_line)
+	if (map_line != NULL)
 		free(map_line);
 	if (line)
 		free(line);
@@ -30,14 +29,12 @@ static int	assign_val(char c)
 	return (0);
 }
 
-int	*get_map_line(char *l, t_cub *cub, int *flag, int height)
+int	*get_map_line(char *l, t_cub *cub, int *flag)
 {
 	int		i;
-	int		width;
 	int		*map_line;
 
-	width = ft_strlen(l);
-	map_line = (int *)malloc(sizeof(int) * (width + 1));
+	map_line = (int *)malloc(sizeof(int) * (ft_strlen(l) + 1));
 	i = -1;
 	while (l[++i])
 	{
@@ -46,7 +43,7 @@ int	*get_map_line(char *l, t_cub *cub, int *flag, int height)
 			if (*flag & P_FLAG)
 				error_map(l, cub, "Duplicate player", map_line);
 			*flag = *flag | P_FLAG;
-			assign_player(cub, i, height, l[i]);
+			assign_player(cub, i, cub->map->height, l[i]);
 			map_line[i] = EMPTY;
 		}
 		else if (l[i] == ' ')
@@ -80,7 +77,7 @@ void	add_map_line(int *map_line, t_cub *cub)
 	cub->map->map = new_map;
 }
 
-void	add_map(char *line, t_cub *cub, int *i, int *flag)
+void	add_map(char *line, t_cub *cub, int *flag)
 {
 	int		width;
 	int		*map_line;
@@ -99,8 +96,8 @@ void	add_map(char *line, t_cub *cub, int *i, int *flag)
 		cub->map->width = width;
 	if (*flag & SEP_FLAG)
 		error_map(l_trim, cub, "Map seperate by newline", NULL);
-	map_line = get_map_line(l_trim, cub, flag, *i);
+	map_line = get_map_line(l_trim, cub, flag);
 	free(l_trim);
 	add_map_line(map_line, cub);
-	*i = *i + 1;
+	cub->map->height += 1;
 }

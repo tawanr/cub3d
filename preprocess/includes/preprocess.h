@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 21:47:23 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:44:52 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	add_cub_wall(t_cub *cub, char *array[]);
 // Extract map
 int		intarray_len(int *array[]);
 void	dup_map(int **new_map, int **old_map);
-void	add_map(char *line, t_cub *cub, int *i, int *flag);
+void	add_map(char *line, t_cub *cub, int *flag);
 void	assign_player(t_cub *cub, int x, int y, char dir);
 
 // Refine map
