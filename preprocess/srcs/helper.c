@@ -6,14 +6,13 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:26:45 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:45:46 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:49:27 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 #include "preprocess.h"
-
 
 void	free_map(t_map *map)
 {
