@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:55:23 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 01:36:04 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:38:47 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	player_move_ws(t_gamevars *gamevars, int fwd)
 	p = gamevars->player;
 	movespeed = gamevars->player->movespeed;
 	map = gamevars->map.map;
-	if (map[(int)*pos_y][(int)(*pos_x - (p->dir_x * fwd * movespeed))] == 0)
+	if (map[(int)*pos_y][(int)(*pos_x + (p->dir_x * fwd * movespeed))] == 0)
 		*pos_x += p->dir_x * fwd * movespeed;
-	if (map[(int)(*pos_y - (p->dir_y * fwd * movespeed))][(int)*pos_x] == 0)
+	if (map[(int)(*pos_y + (p->dir_y * fwd * movespeed))][(int)*pos_x] == 0)
 		*pos_y += p->dir_y * fwd * movespeed;
 }
 

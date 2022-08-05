@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocess.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 21:34:42 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/04 08:40:10 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define SEP_FLAG 2
 # define P_FLAG 4
+
+# include "libft.h"
 
 enum
 {
@@ -41,19 +43,19 @@ enum
 	END = 9
 };
 
-typedef struct s_rgb
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}	t_rgb;
-
 typedef struct s_map
 {
 	int	**map;
 	int	height;
 	int	width;
 }	t_map;
+
+typedef struct s_rgb
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}	t_rgb;
 
 typedef struct s_cub
 {

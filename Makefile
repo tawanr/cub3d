@@ -18,12 +18,12 @@ CC = gcc -Ilibft -Imlx
 CFLAGS = -Wextra -Wall -Werror -Ilibft -I$(MLX_DIR) -I/usr/include
 
 NAME = cub3d
-INCLUDES = -I$(MLX_DIR) -Ilibft -Iincludes
+INCLUDES = -I$(MLX_DIR) -Ilibft -Iincludes -Ipreprocess/includes
 
 ifeq ($(UNAME_S), Darwin)
-	LIBS = -L$(MLX_DIR) -lmlx -L/usr/lib -L$(LIBFT_DIR) -lft -lm -framework OpenGL -framework AppKit
+	LIBS = -L$(MLX_DIR) -lmlx -L/usr/lib -L$(LIBFT_DIR) -lft -lm -framework OpenGL -framework AppKit -Lpreprocess -lprecub3d
 else
-	LIBS = -L$(MLX_DIR) -lmlx -L/usr/lib -L$(LIBFT_DIR) -lft -lXext -lX11 -lm -lz
+	LIBS = -L$(MLX_DIR) -lmlx -L/usr/lib -lXext -lX11 -lm -lz -Lpreprocess -lprecub3d -L$(LIBFT_DIR) -lft
 endif
 
 $(OBJ_DIR)%o: $(SRC_DIR)%c
@@ -35,16 +35,19 @@ all: $(NAME)
 $(NAME): $(addprefix $(OBJ_DIR), $(OBJS))
 	$(MAKE) -C ./libft
 	$(MAKE) -C ./$(MLX_DIR)
+	$(MAKE) -C ./preprocess
 	$(CC) $(addprefix $(OBJ_DIR), $(OBJS)) $(INCLUDES) $(LIBS) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C ./libft
 	$(MAKE) clean -C ./$(MLX_DIR)
+	$(MAKE) clean -C ./preprocess
 	rm -rf $(addprefix $(OBJ_DIR), $(OBJS))
 
 fclean: clean
 	$(MAKE) fclean -C ./libft
 	$(MAKE) clean -C ./$(MLX_DIR)
+	$(MAKE) fclean -C ./preprocess
 	rm -rf $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:34:01 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:02:45 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	inithooks(void *mlx_win, t_gamevars *gamevars)
 
 void	init_player(t_player *player)
 {
-	player->pos_x = 4 - 0.5;
-	player->pos_y = 4 - 0.5;
+	player->pos_x = 15 - 0.5;
+	player->pos_y = 5 - 0.5;
 	player->dir_x = 0;
 	player->dir_y = -1;
 	player->cam_x = 1;

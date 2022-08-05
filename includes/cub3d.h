@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/12 15:05:52 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:30:14 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft.h"
 # include "mlx.h"
+# include "preprocess.h"
 
 # define WWIDTH 1600
 # define WHEIGHT 900
-# define MWIDTH 6
-# define MHEIGHT 5
+# define MWIDTH 11
+# define MHEIGHT 9
 # define MAPSIZE 150
 
 typedef struct s_ray
@@ -51,13 +53,6 @@ typedef struct s_data
 	int		linelen;
 	int		endian;
 }	t_data;
-
-typedef struct s_map
-{
-	int	**map;
-	int	height;
-	int	width;
-}	t_map;
 
 typedef struct s_minimap
 {
@@ -103,8 +98,9 @@ typedef struct s_gamevars
 	t_player	*player;
 	t_minimap	*minimap;
 	t_input		*input;
-	t_texture	*textures;
+	t_texture	textures[4];
 	int			tex_count;
+	t_cub		*map_data;
 }	t_gamevars;
 
 void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w);

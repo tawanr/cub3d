@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:41:23 by spoolpra          #+#    #+#              #
-#    Updated: 2022/08/02 21:19:49 by spoolpra         ###   ########.fr        #
+#    Updated: 2022/08/04 08:25:50 by tratanat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_DIR = srcs/
 OBJ_DIR = objs/
 LIB_DIR = ../libft
 
-INCS = -Iincludes/ -I$(LIB_DIR)
+INCS = -Iincludes/ -I$(LIB_DIR) -I../includes
 NAME = libprecub3d.a
 SRCS =	preprocess.c helper.c \
 		extract_cub.c extract_wall.c extract_map.c extract_map_helper.c \
