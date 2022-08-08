@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:46:20 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/03 21:19:48 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:06:57 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	mousectl(int button, int x, int y, t_gamevars *gamevars)
 {
-	printf("mouse btn: %d\n", button);
+	// printf("mouse btn: %d\n", button);
 	gamevars->input->mouse_x = x;
 	gamevars->input->mouse_y = y;
 	if (button == 1)
@@ -55,7 +55,7 @@ int	mouserot(int x, int y, t_gamevars *gamevars)
 
 int	keymod(int keycode, t_gamevars *gamevars)
 {
-	printf("keycode: %d\n", keycode);
+	// printf("keycode: %d\n", keycode);
 	if (keycode == 100 || keycode == 65363)
 	// if (keycode == 2 || keycode == 124)
 		player_move_ad(gamevars, -1);
