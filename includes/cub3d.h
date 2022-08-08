@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 16:36:22 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 20:59:23 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define MWIDTH 11
 # define MHEIGHT 9
 # define MAPSIZE 150
+# define MMPLSIZE 3
 
 typedef struct s_data
 {
@@ -150,6 +151,10 @@ void			player_move_ad(t_gamevars *gamevars, int fwd);
 void			player_move_ws(t_gamevars *gamevars, int fwd);
 void			player_rotate(t_gamevars *gamevars, int dir);
 
+// Minimap handling
+void			mini_fill(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini);
+void			mini_shift(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini);
+
 // Door animation
 t_door			*new_door(int map_x, int map_y);
 int				draw_door(t_gamevars *gv, int map_x, int map_y);
@@ -165,7 +170,7 @@ void			calc_ray(t_gamevars *gamevars);
 double			wall_distance(t_gamevars *gamevars, t_ray *ray);
 void			calc_sidedist(t_gamevars *gamevars, t_ray *ray);
 double			dda(t_gamevars *gamevars, t_ray *ray);
-double			get_distance(t_gamevars *gamevars, t_ray *ray, int map_x, int map_y);
+double			get_dis(t_gamevars *gamevars, t_ray *ray, int map_x, int map_y);
 int				ray_door(t_gamevars *gv, t_ray *ray, int map_x, int map_y);
 
 // Draw calls
