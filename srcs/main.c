@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 08:53:06 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:22:24 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ int	main(int argc, char **argv)
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.linelen, &img.endian);
 	init_player(&player);
 	init_minimap(&minimap);
-	texture_load(&gamevars);
 	gamevars.player = &player;
 	gamevars.map_data = preprocess_cub(argc, argv);
+	printf("north: %s\n", gamevars.map_data->north);
+	texture_load(&gamevars);
 	gamevars.minimap = &minimap;
 	gamevars.input = &input;
 	init_gamevars(&gamevars);
