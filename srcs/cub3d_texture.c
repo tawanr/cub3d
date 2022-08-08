@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:57:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/12 21:06:30 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:06:57 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,32 @@
 
 int	texture_load(t_gamevars *gamevars)
 {
-	int			count;
 	int			i;
-	char	*path = "textures/wall_1.xpm";
+	char		*path[5];
 	t_texture	*tex;
 
-	count = 1;
 	i = 0;
-	tex = (t_texture *)malloc(sizeof(t_texture));
-	while (i < count)
+	// printf("loading north: %s\n", gamevars->map_data->north);
+	// path[0] = gamevars->map_data->north;
+	// path[1] = gamevars->map_data->south;
+	// path[2] = gamevars->map_data->west;
+	// path[3] = gamevars->map_data->east;
+	path[0] = "./textures/wall_1.xpm";
+	path[1] = "./textures/wall_2.xpm";
+	path[2] = "./textures/wall_3.xpm";
+	path[3] = "./textures/wall_4.xpm";
+	path[4] = "./textures/door.xpm";
+	while (i < 5)
 	{
+		tex = &gamevars->textures[i];
+		printf("cub3d: loading texture: %s\n", path[i]);
 		tex->img = mlx_xpm_file_to_image(gamevars->mlx,
-				path, &tex->width, &tex->height);
-		printf("loading texture width: %d height: %d\n", tex->width, tex->height);
+				path[i], &tex->width, &tex->height);
 		if (!tex->img)
 			return (1);
 		tex->img->addr = mlx_get_data_addr(tex->img,
 				&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
-		printf("done loading texture\n");
 		i++;
 	}
-	for (int i = 0; i < tex->width * tex->height; i++)
-		printf("[%0#10x]", *(int *)(tex->img->addr + (i * 4)));
-	printf("tex_mem: %d\n", tex->width * tex->height * 4);
-	gamevars->textures = tex;
 	return (0);
 }

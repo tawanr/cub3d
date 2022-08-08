@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/08 21:51:49 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:09:23 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define SEP_FLAG 2
 # define P_FLAG 4
+
+# include "libft.h"
 
 enum
 {
@@ -39,13 +41,6 @@ enum
 	END = 9
 };
 
-typedef struct s_rgb
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}	t_rgb;
-
 typedef struct s_map
 {
 	int	**map;
@@ -53,12 +48,20 @@ typedef struct s_map
 	int	width;
 }	t_map;
 
+
 typedef struct s_preplayer
 {
 	int		x;
 	int		y;
 	char	dir;
 }	t_preplayer;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
 typedef struct s_cub
 {

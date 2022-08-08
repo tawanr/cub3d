@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 02:34:12 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/11 14:37:35 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:01:00 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 int	end_win(t_gamevars *gamevars)
 {
-	int	y;
-
-	y = 0;
-	while (y < MHEIGHT)
-		free(gamevars->map.map[y++]);
-	free(gamevars->map.map);
+	cleanup(gamevars);
 	mlx_destroy_image(gamevars->mlx, gamevars->img->img);
 	mlx_clear_window(gamevars->mlx, gamevars->mlx_win);
 	mlx_destroy_window(gamevars->mlx, gamevars->mlx_win);
-	// mlx_destroy_display(gamevars->mlx);
+	mlx_destroy_display(gamevars->mlx);
 	free(gamevars->mlx);
 	exit(0);
+}
+
+void	cleanup(t_gamevars *gamevars)
+{
+	int	row;
+
+	row = 0;
+	while (row < gamevars->map.height)
+		free(gamevars->map.map[row++]);
+	free(gamevars->map.map);
+	free(gamevars->doorcalls);
 }

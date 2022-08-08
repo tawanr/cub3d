@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d_minimap.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/12 20:34:24 by tratanat         ###   ########.fr       */
+/*   Created: 2022/08/07 20:53:00 by tratanat          #+#    #+#             */
+/*   Updated: 2022/08/07 20:53:13 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ void	draw_player(t_gamevars *gamevars, int scale, int off_h, int off_w)
 
 	size = 3;
 	player = gamevars->player;
-	x = (player->pos_x * scale) + off_w - size;
-	y = (player->pos_y * scale) + off_h - size;
-	while (x <= (player->pos_x * scale) + off_w + size)
+	x = (int)((MWIDTH / 2.0 * scale) + off_w - size);
+	y = (int)((MHEIGHT / 2.0 * scale) + off_h - size);
+	while (x <= (int)((MWIDTH / 2.0 * scale) + off_w + size))
 	{
-		while (y <= (player->pos_y * scale) + off_h + size)
+		while (y <= (int)((MHEIGHT / 2.0 * scale) + off_h + size))
 			if (x < WWIDTH && y < WHEIGHT)
 				pixel_put(gamevars->img, x, y++, 0x0000FF00);
-		y = (player->pos_y * scale) + off_h - size;
+		y = (int)((MHEIGHT / 2.0 * scale) + off_h - size);
 		x++;
 	}
-	ray_x = (player->pos_x * scale) + off_w;
-	ray_y = (player->pos_y * scale) + off_h;
+	ray_x = (MWIDTH / 2.0f * scale) + off_w;
+	ray_y = (MHEIGHT / 2.0f * scale) + off_h;
 	while (ray_x > off_w && ray_x < off_w + (MWIDTH * scale) && ray_y > off_h && ray_y < off_h + (MHEIGHT * scale))
 	{
 		ray_x += player->dir_x;
@@ -77,7 +77,7 @@ void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w)
 		{
 			dx = off_w + (mx * scale);
 			dy = off_h + (my * scale);
-			if (mx < 6)
+			if (mx < MWIDTH)
 				while (dx < off_w + ((mx + 1) * scale) && dx < WWIDTH)
 					pixel_put(gamevars->img, dx++, dy, 0x00FFFFFF);
 			dx = off_w + (mx * scale);
@@ -86,13 +86,20 @@ void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w)
 				while (dy < off_h + ((my + 1) * scale) && dy < WHEIGHT)
 				{
 					pixel_put(gamevars->img, dx, dy++, 0x00FFFFFF);
-					if (mx < MWIDTH && my < MHEIGHT && map[my][mx] == 1)
-						while (dx < off_w + ((mx + 1) * scale) && dx < WWIDTH)
-							pixel_put(gamevars->img, dx++, dy, 0x00444444);
-					else if (mx < MWIDTH && my < MHEIGHT)
-						while (dx < off_w + ((mx + 1) * scale) && dx < WWIDTH)
-							pixel_put(gamevars->img, dx++, dy, 0x00EEEEEE);
-					dx = off_w + (mx * scale);
+					if (mx < MWIDTH)
+					{
+						if ((int)(gamevars->player->pos_x - (int)(MWIDTH / 2) + mx) >= 0 && (int)(gamevars->player->pos_x - (int)(MWIDTH / 2) + mx) < gamevars->map.width &&\
+							(int)(gamevars->player->pos_y - (int)(MHEIGHT / 2) + my) >= 0 && (int)(gamevars->player->pos_y - (int)(MHEIGHT / 2) + my) < gamevars->map.height &&\
+							map[(int)(gamevars->player->pos_y - (int)(MHEIGHT / 2) + my)][(int)(gamevars->player->pos_x - (int)(MWIDTH / 2) + mx)] != 0)
+						{
+							while (dx < off_w + ((mx + 1) * scale) && dx < WWIDTH)
+								pixel_put(gamevars->img, dx++, dy, 0x00444444);
+						}
+						else if (mx < MWIDTH && my < MHEIGHT)
+							while (dx < off_w + ((mx + 1) * scale) && dx < WWIDTH)
+								pixel_put(gamevars->img, dx++, dy, 0x00EEEEEE);
+						dx = off_w + (mx * scale);
+					}
 				}
 			}
 			mx++;
@@ -100,49 +107,4 @@ void	draw_grid(t_gamevars *gamevars, int scale, int off_h, int off_w)
 		mx = 0;
 		my++;
 	}
-}
-
-int	drawframe(t_gamevars *gamevars)
-{
-	t_data	*img;
-	void	*o_img;
-	char	*addr;
-
-	o_img = gamevars->img->img;
-	img = gamevars->img;
-	img->img = mlx_new_image(gamevars->mlx, WWIDTH, WHEIGHT);
-	addr = mlx_get_data_addr(img->img, &img->bpp, &img->linelen, &img->endian);
-	img->addr = addr;
-	draw_ceiling(gamevars);
-	draw_floor(gamevars);
-	calc_ray(gamevars);
-	draw_map(gamevars);
-	mlx_put_image_to_window(gamevars->mlx, gamevars->mlx_win, img->img, 0, 0);
-	mlx_destroy_image(gamevars->mlx, o_img);
-	return (0);
-}
-
-int	main(void)
-{
-	t_gamevars	gamevars;
-	t_data		img;
-	t_player	player;
-	t_minimap	minimap;
-	t_input		input;
-
-	gamevars.mlx = mlx_init();
-	gamevars.mlx_win = mlx_new_window(gamevars.mlx, WWIDTH, WHEIGHT, "cub3d");
-	img.img = mlx_new_image(gamevars.mlx, WWIDTH, WHEIGHT);
-	gamevars.img = &img;
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.linelen, &img.endian);
-	init_player(&player);
-	init_minimap(&minimap);
-	texture_load(&gamevars);
-	gamevars.player = &player;
-	gamevars.map.map = init_map();
-	gamevars.minimap = &minimap;
-	input.rmouse_pressed = 0;
-	gamevars.input = &input;
-	inithooks(gamevars.mlx_win, &gamevars);
-	mlx_loop(gamevars.mlx);
 }
