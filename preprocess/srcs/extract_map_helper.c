@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:55:18 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:06:37 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:45:17 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	dup_map(int **new_map, int **old_map)
 
 void	assign_player(t_cub *cub, int x, int y, char dir)
 {
-	t_player	*player;
+	t_preplayer	*player;
 
-	player = (t_player *)malloc(sizeof(t_player) * 1);
+	player = (t_preplayer *)malloc(sizeof(t_preplayer) * 1);
 	if (!player)
 		return ;
 	player->x = x;

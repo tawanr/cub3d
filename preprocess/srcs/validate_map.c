@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:42:38 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 21:52:21 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:52:28 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,56 +20,56 @@ int	check_low_left(t_map *map, int i, int j);
 
 int	check_up(t_map *map, int i, int j)
 {
-	int	checking;
+	int	c;
 
 	if (i <= 0)
 		return (0);
-	checking = map->map[i - 1][j];
-	if (checking == SPACE)
+	c = map->map[i - 1][j];
+	if (c == SPACE)
 		return (0);
-	if (checking == EMPTY)
+	if (c == EMPTY || c == DOOR || c == OBJ)
 		return (check_close_map(map, i - 1, j));
 	return (1);
 }
 
 int	check_up_right(t_map *map, int i, int j)
 {
-	int	checking;
+	int	c;
 
 	if (i <= 0 || j + 1 >= map->width)
 		return (0);
-	checking = map->map[i - 1][j + 1];
-	if (checking == SPACE)
+	c = map->map[i - 1][j + 1];
+	if (c == SPACE)
 		return (0);
-	if (checking == EMPTY)
+	if (c == EMPTY || c == DOOR || c == OBJ)
 		return (check_close_map(map, i - 1, j + 1));
 	return (1);
 }
 
 int	check_up_left(t_map *map, int i, int j)
 {
-	int	checking;
+	int	c;
 
 	if (i <= 0 || j <= 0)
 		return (0);
-	checking = map->map[i - 1][j - 1];
-	if (checking == SPACE)
+	c = map->map[i - 1][j - 1];
+	if (c == SPACE)
 		return (0);
-	if (checking == EMPTY)
+	if (c == EMPTY || c == DOOR || c == OBJ)
 		return (check_close_map(map, i - 1, j - 1));
 	return (1);
 }
 
 int	check_right(t_map *map, int i, int j)
 {
-	int	checking;
+	int	c;
 
 	if (j + 1 >= map->width)
 		return (0);
-	checking = map->map[i][j + 1];
-	if (checking == SPACE)
+	c = map->map[i][j + 1];
+	if (c == SPACE)
 		return (0);
-	if (checking == EMPTY)
+	if (c == EMPTY || c == DOOR || c == OBJ)
 		return (check_close_map(map, i, j + 1));
 	return (1);
 }

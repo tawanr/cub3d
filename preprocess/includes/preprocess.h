@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:44:52 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:51:49 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ enum
 {
 	EMPTY,
 	WALL,
+	DOOR,
+	OBJ,
 	SPACE,
 	CHECK,
 	END = 9
@@ -51,12 +53,12 @@ typedef struct s_map
 	int	width;
 }	t_map;
 
-typedef struct s_player
+typedef struct s_preplayer
 {
 	int		x;
 	int		y;
 	char	dir;
-}	t_player;
+}	t_preplayer;
 
 typedef struct s_cub
 {
@@ -64,10 +66,12 @@ typedef struct s_cub
 	char		*south;
 	char		*west;
 	char		*east;
+	char		*door;
+	char		*sprite;
 	t_rgb		*floor;
 	t_rgb		*ceiling;
 	t_map		*map;
-	t_player	*player;
+	t_preplayer	*player;
 }	t_cub;
 
 // Preprocess
@@ -101,6 +105,8 @@ char	**split_space(char *s);
 // Validate cub
 int		map_start(t_cub *cub);
 int		validate_cub(t_cub *cub);
+int		validate_door(t_cub *cub);
+int		validate_sprite(t_cub *cub);
 int		check_close_map(t_map *map, int i, int j);
 
 #endif
