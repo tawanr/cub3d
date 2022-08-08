@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 15:18:16 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 20:59:09 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:32:00 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	draw_wall_col(t_gamevars *gamevars, int x, t_ray *ray)
 			color = 0;
 		else
 		{
-			tex_pos = ray->texture->width * 4;
-			tex_pos *= (int)(tex_pos * ray->texture->height);
-			tex_pos += (int)((x_off * (ray->texture->width)) * 4);
+			tex_pos = floor(tex_pos * ray->texture->height);
+			tex_pos = tex_pos * ray->texture->width * 4;
+			tex_pos += floor(x_off * ray->texture->width) * 4;
 			color = *(int *)(&ray->texture->img->addr[(int)tex_pos]);
 		}
 		if (x > 0 && x < WWIDTH && y > 0 && y < WHEIGHT)

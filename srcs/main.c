@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 16:22:24 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:14:56 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	main(int argc, char **argv)
 	init_minimap(&minimap);
 	gamevars.player = &player;
 	gamevars.map_data = preprocess_cub(argc, argv);
-	printf("north: %s\n", gamevars.map_data->north);
 	texture_load(&gamevars);
 	gamevars.minimap = &minimap;
 	gamevars.input = &input;

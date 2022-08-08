@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 20:59:23 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:52:03 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include "preprocess.h"
+# include "input_keys.h"
 
 # define WWIDTH 800
 # define WHEIGHT 600
@@ -113,6 +114,19 @@ typedef struct s_door
 	struct s_door	*prev;
 }	t_door;
 
+typedef struct s_sprite
+{
+	t_pos			pos;
+	t_texture		*textures;
+	int				frames;
+	int				scale;
+	int				animate;
+	int				visible;
+	int				time;
+	struct s_sprite	*next;
+	struct s_sprite	*prev;
+}	t_sprite;
+
 typedef struct s_gamevars
 {
 	int			scale;
@@ -129,12 +143,9 @@ typedef struct s_gamevars
 	int			time;
 	double		frametime;
 	t_door		**doorcalls;
+	t_sprite	**spriteq;
+	double		zd[WWIDTH];
 }	t_gamevars;
-
-void			draw_grid(t_gamevars *gv, int scale, int off_h, int off_w);
-void			draw_player(t_gamevars *gv, int scale, int off_h, int off_w);
-int				drawframe(t_gamevars *gamevars);
-void			draw_map(t_gamevars *gamevars);
 
 // Initializations
 void			init_gamevars(t_gamevars *gamevars);
@@ -152,6 +163,10 @@ void			player_move_ws(t_gamevars *gamevars, int fwd);
 void			player_rotate(t_gamevars *gamevars, int dir);
 
 // Minimap handling
+void			draw_grid(t_gamevars *gv, t_minimap *m);
+void			draw_player(t_gamevars *gv, int scale, int off_h, int off_w);
+int				drawframe(t_gamevars *gamevars);
+void			draw_map(t_gamevars *gamevars);
 void			mini_fill(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini);
 void			mini_shift(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini);
 

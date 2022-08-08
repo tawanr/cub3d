@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 20:53:00 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 19:15:26 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:25:27 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ void	draw_grid(t_gamevars *gamevars, t_minimap *mini)
 {
 	t_pos	m;
 	t_pos	d;
-	int		**map;
 
 	m.x = 0;
 	m.y = 0;
-	map = gamevars->map.map;
 	while (m.y <= MHEIGHT)
 	{
 		while (m.x <= MWIDTH)
@@ -93,20 +91,20 @@ void	mini_shift(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini)
 	t_pos	p;
 	t_pos	mm;
 
-	p->x = gv->player->pos_x;
-	p->y = gv->player->pos_y;
-	mm->x = (int)(p->x - (int)(MWIDTH / 2) + m->x);
-	mm->y = (int)(p->y - (int)(MHEIGHT / 2) + m->y);
-	if ((int)(p->x - (int)(MWIDTH / 2) + m->x) >= 0 && \
-		(int)(p->x - (int)(MWIDTH / 2) + m->x) < gv->map->width && \
-		(int)(p->y - (int)(MHEIGHT / 2) + m->y) >= 0 && \
-		(int)(p->y - (int)(MHEIGHT / 2) + m->y) < gv->map.height && \
-		map[mm->y][mm->x] != 0)
+	p.x = gv->player->pos_x;
+	p.y = gv->player->pos_y;
+	mm.x = (int)(p.x - (int)(MWIDTH / 2) + m->x);
+	mm.y = (int)(p.y - (int)(MHEIGHT / 2) + m->y);
+	if ((int)(p.x - (int)(MWIDTH / 2) + m->x) >= 0 && \
+		(int)(p.x - (int)(MWIDTH / 2) + m->x) < gv->map.width && \
+		(int)(p.y - (int)(MHEIGHT / 2) + m->y) >= 0 && \
+		(int)(p.y - (int)(MHEIGHT / 2) + m->y) < gv->map.height && \
+		gv->map.map[mm.y][mm.x] != 0)
 	{
 		while (d->x < mini->pos_x + ((m->x + 1) * mini->scale) && d->x < WWIDTH)
 		{
-			if (map[mm->y][mm->x] == 2)
-				pixel_put(gv->img, d->x++, d->y, 0x00DD0000);
+			if (gv->map.map[mm.y][mm.x] == 2)
+				pixel_put(gv->img, d->x++, d->y, 0x000000DD);
 			else
 				pixel_put(gv->img, d->x++, d->y, 0x00444444);
 		}

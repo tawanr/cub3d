@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 14:58:13 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:51:51 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void	init_gamevars(t_gamevars *gamevars)
 	gamevars->input->rmouse_pressed = 0;
 	gamevars->doorcalls = (t_door **)malloc(sizeof(t_door *));
 	*gamevars->doorcalls = NULL;
-	gamevars->map.map[7][14] = 2;
-	gamevars->map.map[3][18] = 2;
+	gamevars->spriteq = (t_sprite **)malloc(sizeof(t_sprite *));
 }

@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 21:03:41 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 19:14:34 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:31:15 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	calc_ray(t_gamevars *gamevars)
 		ray.ray_x = p->dir_x + p->cam_x * (2 * x / (double)WWIDTH - 1);
 		ray.ray_y = p->dir_y + p->cam_y * (2 * x / (double)WWIDTH - 1);
 		ray.distance = wall_distance(gamevars, &ray);
+		gamevars->zd[x] = ray.distance;
 		if (ray.door == 1)
 			ray.texture = &gamevars->textures[4];
 		else if (ray.side == 0 && ray.step_x >= 0)
