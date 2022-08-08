@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 15:18:16 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 14:40:55 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:44:36 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ void	draw_wall_col(t_gamevars *gamevars, int x, t_ray *ray)
 	while (y < WHEIGHT / 2 + vert_line)
 	{
 		tex_pos = (double)((y - (WHEIGHT / 2 - vert_line)) / (vert_line * 2));
-		color = *(int *)(&ray->texture->img->addr[((int)(x_offset * (ray->texture->width)) * 4) + ((int)(tex_pos * ray->texture->height) * ray->texture->width * 4)]);
-		if (x_offset < 0.005 || x_offset > 0.995 || tex_pos < 0.01 || tex_pos > 0.99)
+		if (x_offset < 0.005 || x_offset > 0.995 || \
+			tex_pos < 0.01 || tex_pos > 0.99)
 			color = 0;
+		else
+		{
+			tex_pos = (int)(tex_pos * ray->texture->height) * ray->texture->width * 4;
+			tex_pos += (int)((x_offset * (ray->texture->width)) * 4);
+			color = *(int *)(&ray->texture->img->addr[(int)tex_pos]);
+			// color = *(int *)(&ray->texture->img->addr[((int)(x_offset * (ray->texture->width)) * 4) + ((int)(tex_pos * ray->texture->height) * ray->texture->width * 4)]);
+		}
 		if (x > 0 && x < WWIDTH && y > 0 && y < WHEIGHT)
 			pixel_put(gamevars->img, x, y, color);
 		y++;
