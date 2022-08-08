@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:44:52 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:13:11 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ typedef struct s_map
 }	t_map;
 
 
-typedef struct s_player
+typedef struct s_preplayer
 {
 	int		x;
 	int		y;
 	char	dir;
-}	t_player;
+}	t_preplayer;
 
 typedef struct s_rgb
 {
@@ -70,7 +70,7 @@ typedef struct s_cub
 	t_rgb		*floor;
 	t_rgb		*ceiling;
 	t_map		*map;
-	t_player	*player;
+	t_preplayer	*player;
 }	t_cub;
 
 // Preprocess

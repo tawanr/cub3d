@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:57:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 15:06:57 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:11:39 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	texture_load(t_gamevars *gamevars)
 
 	i = 0;
 	// printf("loading north: %s\n", gamevars->map_data->north);
-	// path[0] = gamevars->map_data->north;
-	// path[1] = gamevars->map_data->south;
-	// path[2] = gamevars->map_data->west;
-	// path[3] = gamevars->map_data->east;
-	path[0] = "./textures/wall_1.xpm";
-	path[1] = "./textures/wall_2.xpm";
-	path[2] = "./textures/wall_3.xpm";
-	path[3] = "./textures/wall_4.xpm";
+	path[0] = gamevars->map_data->north;
+	path[1] = gamevars->map_data->south;
+	path[2] = gamevars->map_data->west;
+	path[3] = gamevars->map_data->east;
+	// path[0] = "./textures/wall_1.xpm";
+	// path[1] = "./textures/wall_2.xpm";
+	// path[2] = "./textures/wall_3.xpm";
+	// path[3] = "./textures/wall_4.xpm";
 	path[4] = "./textures/door.xpm";
 	while (i < 5)
 	{
