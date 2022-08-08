@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:26:16 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 21:40:27 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:55:25 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	map_start(t_cub *cub)
 	if (!cub->floor)
 		return (0);
 	if (!cub->ceiling)
+		return (0);
+	if (!cub->door)
+		return (0);
+	if (!cub->sprite)
 		return (0);
 	return (1);
 }
@@ -66,8 +70,9 @@ static t_map	*map_dup(t_map *map)
 
 int	validate_close_map(t_map *map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	c;
 
 	i = 0;
 	while (i < map->height)
@@ -75,7 +80,8 @@ int	validate_close_map(t_map *map)
 		j = 0;
 		while (j < map->width)
 		{
-			if (map->map[i][j] == EMPTY)
+			c = map->map[i][j];
+			if (c == EMPTY || c == DOOR || c == OBJ)
 			{
 				if (!check_close_map(map, i, j))
 					return (0);
@@ -100,5 +106,9 @@ int	validate_cub(t_cub *cub)
 		return (0);
 	}
 	free_map(check_map);
+	if (!validate_door(cub))
+		return (0);
+	if (!validate_sprite(cub))
+		return (0);
 	return (1);
 }

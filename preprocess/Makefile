@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+         #
+#    By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:41:23 by spoolpra          #+#    #+#              #
-#    Updated: 2022/08/04 08:25:50 by tratanat         ###   ########.fr        #
+#    Updated: 2022/08/08 22:07:40 by spoolpra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ NAME = libprecub3d.a
 SRCS =	preprocess.c helper.c \
 		extract_cub.c extract_wall.c extract_map.c extract_map_helper.c \
 		refine_map.c \
-		validate_cub.c validate_map.c validate_map_helper.c\
+		validate_cub.c validate_map.c validate_map_helper.c validate_bonus.c\
 		split_space.c split_space_helper.c
 OBJS = $(SRCS:.c=.o)
 

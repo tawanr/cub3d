@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:41:09 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:45:12 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:40:55 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	cub_init(t_cub *cub)
 	cub->south = NULL;
 	cub->west = NULL;
 	cub->east = NULL;
+	cub->door = NULL;
+	cub->sprite = NULL;
 	cub->floor = NULL;
 	cub->ceiling = NULL;
 	cub->map = NULL;

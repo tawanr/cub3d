@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocess.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/08 16:13:11 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:09:23 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ enum
 {
 	EMPTY,
 	WALL,
+	DOOR,
+	OBJ,
 	SPACE,
 	CHECK,
 	END = 9
@@ -56,9 +58,9 @@ typedef struct s_preplayer
 
 typedef struct s_rgb
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	int	r;
+	int	g;
+	int	b;
 }	t_rgb;
 
 typedef struct s_cub
@@ -67,6 +69,8 @@ typedef struct s_cub
 	char		*south;
 	char		*west;
 	char		*east;
+	char		*door;
+	char		*sprite;
 	t_rgb		*floor;
 	t_rgb		*ceiling;
 	t_map		*map;
@@ -104,6 +108,8 @@ char	**split_space(char *s);
 // Validate cub
 int		map_start(t_cub *cub);
 int		validate_cub(t_cub *cub);
+int		validate_door(t_cub *cub);
+int		validate_sprite(t_cub *cub);
 int		check_close_map(t_map *map, int i, int j);
 
 #endif

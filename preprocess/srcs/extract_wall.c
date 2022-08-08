@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 13:51:55 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/02 17:07:12 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:50:58 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,17 @@ void	add_flcl(t_cub *cub, char *array[], t_rgb **flcl, char *rgb[])
 	free_strarray(rgb);
 }
 
+void	add_doorsprite(t_cub *cub, char **path, char *array[])
+{
+	if (*path != NULL)
+		error_add(cub, array, "Duplicate type identifier");
+	*path = ft_strdup(array[1]);
+}
+
 void	add_cub_wall(t_cub *cub, char *array[])
 {
-	if (strarray_len(array) > 2)
-		error_add(cub, array, "Excess information found");
+	if (strarray_len(array) != 2)
+		error_add(cub, array, "Invalid informations count");
 	if (ft_strcmp("NO", array[0]) == 0)
 		add_wall(cub, array, NORTH);
 	else if (ft_strcmp("SO", array[0]) == 0)
@@ -78,6 +85,10 @@ void	add_cub_wall(t_cub *cub, char *array[])
 		add_wall(cub, array, EAST);
 	else if (ft_strcmp("WE", array[0]) == 0)
 		add_wall(cub, array, WEST);
+	else if (ft_strcmp("D", array[0]) == 0)
+		add_doorsprite(cub, &cub->door, array);
+	else if (ft_strcmp("SP", array[0]) == 0)
+		add_doorsprite(cub, &cub->sprite, array);
 	else if (ft_strcmp("F", array[0]) == 0)
 		add_flcl(cub, array, &cub->floor, ft_split(array[1], ','));
 	else if (ft_strcmp("C", array[0]) == 0)

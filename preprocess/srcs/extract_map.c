@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:50:04 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:43:48 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:46:40 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ static void	error_map(char *line, t_cub *cub, char *msg, int *map_line)
 static int	assign_val(char c)
 {
 	if (c == '1')
-		return (1);
-	return (0);
+		return (WALL);
+	else if (c == '-')
+		return (DOOR);
+	else if (c == ' ')
+		return (SPACE);
+	return (EMPTY);
 }
 
 int	*get_map_line(char *l, t_cub *cub, int *flag)
@@ -46,10 +50,10 @@ int	*get_map_line(char *l, t_cub *cub, int *flag)
 			assign_player(cub, i, cub->map->height, l[i]);
 			map_line[i] = EMPTY;
 		}
-		else if (l[i] == ' ')
-			map_line[i] = SPACE;
-		else if (l[i] == '0' || l[i] == '1')
+		else if (l[i] == '0' || l[i] == '1' || l[i] == '-' || l[i] == ' ')
 			map_line[i] = assign_val(l[i]);
+		else if (l[i] == '!')
+			map_line[i] = OBJ;
 		else
 			error_map(l, cub, "Invalid character in map", map_line);
 	}

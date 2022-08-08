@@ -6,7 +6,7 @@
 /*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:26:45 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/04 22:49:27 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:45:14 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ void	free_cub(t_cub *cub)
 		free(cub->west);
 	if (cub->east)
 		free(cub->east);
+	if (cub->door)
+		free(cub->door);
 	if (cub->floor)
 		free(cub->floor);
 	if (cub->ceiling)
 		free(cub->ceiling);
 	if (cub->player)
 		free(cub->player);
+	if (cub->sprite)
+		free(cub->sprite);
 	free_map(cub->map);
 	free(cub);
 }
