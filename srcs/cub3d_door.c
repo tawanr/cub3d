@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:52:35 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 16:05:50 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:38:24 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ int	draw_door(t_gamevars *gv, int map_x, int map_y)
 			door = door->next;
 		}
 	}
-	door = (t_door *)malloc(sizeof(t_door));
-	door->animate = 0;
-	door->opening = 0;
-	door->pos.x = map_x;
-	door->pos.y = map_y;
-	door->visible = 1;
+	door = new_door(map_x, map_y);
 	door->next = *gv->doorcalls;
 	if (door->next)
 		door->next->prev = door;
@@ -74,9 +69,7 @@ void	run_door(t_gamevars *gv)
 {
 	t_door	*temp;
 	t_door	*clean;
-	int		count;
 
-	count = 0;
 	temp = *gv->doorcalls;
 	while (temp)
 	{
@@ -95,26 +88,26 @@ void	run_door(t_gamevars *gv)
 			continue ;
 		}
 		temp->visible = 0;
-		check_door_open(gv, temp, gv->player->pos_x, gv->player->pos_y);
-		count++;
+		chk_door_open(gv, temp, gv->player->pos_x, gv->player->pos_y);
 		temp = temp->next;
 	}
 }
 
-void	check_door_open(t_gamevars *gv, t_door *door, double x, double y)
+void	chk_door_open(t_gamevars *gv, t_door *door, double x, double y)
 {
 	int	playerhold;
 
 	if (door->opening == 0)
 	{
-		printf("fabs_y: %f\n", fabs(door->pos.y - y));
 		if (door->pos.x == (int)x && fabs(door->pos.y - y) - 0.5 <= 1)
 			door->opening = 1;
 		else if (door->pos.y == (int)y && fabs(door->pos.x - x) - 0.5 <= 1)
 			door->opening = 1;
 	}
-	playerhold = (door->pos.x == (int)gv->player->pos_x && fabs(gv->player->pos_y - door->pos.y) - 0.5 < 1);
-	playerhold = (playerhold || ((door->pos.y == (int)gv->player->pos_y) && fabs(gv->player->pos_x - door->pos.x) - 0.5 < 1));
+	playerhold = (door->pos.x == (int)gv->player->pos_x && \
+			fabs(gv->player->pos_y - door->pos.y) - 0.5 < 1);
+	playerhold = (playerhold || ((door->pos.y == (int)gv->player->pos_y) \
+			&& fabs(gv->player->pos_x - door->pos.x) - 0.5 < 1));
 	if (door->opening)
 	{
 		if (animate_door(door, playerhold))
@@ -127,9 +120,6 @@ void	check_door_open(t_gamevars *gv, t_door *door, double x, double y)
 // Animate door through frames; animate = 1 -> opening; animate = 2 -> closing
 int	animate_door(t_door *door, int playerhold)
 {
-	double	tto;
-
-	tto = 1.5;
 	if (door->animate == 0)
 	{
 		door->time = gettime();
@@ -141,13 +131,13 @@ int	animate_door(t_door *door, int playerhold)
 		door->time = gettime();
 	}
 	if (door->opening == 1)
-		door->animate = (double)(gettime() - door->time) / 1000000.0 / tto;
+		door->animate = (double)(gettime() - door->time) / door->tto;
 	if (door->animate >= 1)
 		door->animate = 1;
 	if (door->animate >= 1 && door->opening == 1)
 		return (1);
 	else if (door->opening == 2)
-		door->animate = 1 - (double)(gettime() - door->time) / 1000000.0 / tto;
+		door->animate = 1 - (double)(gettime() - door->time) / door->tto;
 	if (door->animate <= 0)
 		door->animate = 0;
 	if (door->animate <= 0)

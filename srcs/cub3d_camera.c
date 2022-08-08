@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 21:03:41 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 15:40:43 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:31:15 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	calc_ray(t_gamevars *gamevars)
 		ray.ray_x = p->dir_x + p->cam_x * (2 * x / (double)WWIDTH - 1);
 		ray.ray_y = p->dir_y + p->cam_y * (2 * x / (double)WWIDTH - 1);
 		ray.distance = wall_distance(gamevars, &ray);
+		gamevars->zd[x] = ray.distance;
 		if (ray.door == 1)
 			ray.texture = &gamevars->textures[4];
 		else if (ray.side == 0 && ray.step_x >= 0)
@@ -101,7 +102,7 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 	while (gamevars->map.map[map_y][map_x] != 1)
 	{
 		if (ray_door(gamevars, ray, map_x, map_y))
-			return (get_distance(gamevars, ray, map_x, map_y));
+			return (get_dis(gamevars, ray, map_x, map_y));
 		if (ray->side_dx < ray->side_dy)
 		{
 			ray->side_dx += ray->delta_x;
@@ -117,10 +118,10 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 			ray->side = 1;
 		}
 	}
-	return (get_distance(gamevars, ray, map_x, map_y));
+	return (get_dis(gamevars, ray, map_x, map_y));
 }
 
-double	get_distance(t_gamevars *gamevars, t_ray *ray, int map_x, int map_y)
+double	get_dis(t_gamevars *gamevars, t_ray *ray, int map_x, int map_y)
 {
 	double	distance;
 

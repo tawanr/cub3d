@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 09:27:20 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 15:59:41 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:38:44 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ double	door_ray_open(t_gamevars *gv, t_ray *ray, int map_x, int map_y)
 	double	offset_y;
 	t_door	*door;
 
-	offset_y = gv->player->pos_y + (ray->side_dx - (ray->delta_x / 2)) * ray->ray_y;
-	offset_x = gv->player->pos_x + (ray->side_dy - (ray->delta_y / 2)) * ray->ray_x;
+	offset_y = gv->player->pos_y + (ray->side_dx - \
+			(ray->delta_x / 2)) * ray->ray_y;
+	offset_x = gv->player->pos_x + (ray->side_dy - \
+			(ray->delta_y / 2)) * ray->ray_x;
 	door = get_doorcall(gv, map_x, map_y);
 	if (!door)
 		return (1);
@@ -73,4 +75,18 @@ int	check_door_tile(t_gamevars *gv, t_ray *ray)
 			return (1);
 	}
 	return (0);
+}
+
+t_door	*new_door(int map_x, int map_y)
+{
+	t_door	*door;
+
+	door = (t_door *)malloc(sizeof(t_door));
+	door->animate = 0;
+	door->opening = 0;
+	door->pos.x = map_x;
+	door->pos.y = map_y;
+	door->visible = 1;
+	door->tto = 1000000.0 / 1.5;
+	return (door);
 }

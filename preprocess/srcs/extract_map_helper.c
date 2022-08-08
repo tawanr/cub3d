@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:55:18 by spoolpra          #+#    #+#             */
 /*   Updated: 2022/08/08 21:45:17 by spoolpra         ###   ########.fr       */
