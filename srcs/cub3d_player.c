@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:55:23 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 01:36:04 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:35:17 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	player_move_ws(t_gamevars *gamevars, int fwd)
 	pos_x = &gamevars->player->pos_x;
 	pos_y = &gamevars->player->pos_y;
 	p = gamevars->player;
-	movespeed = gamevars->player->movespeed;
+	movespeed = gamevars->player->movespeed * gamevars->frametime;
 	map = gamevars->map.map;
-	if (map[(int)*pos_y][(int)(*pos_x - (p->dir_x * fwd * movespeed))] == 0)
+	if (map[(int)*pos_y][(int)(*pos_x + (p->dir_x * fwd * movespeed))] == 0)
 		*pos_x += p->dir_x * fwd * movespeed;
-	if (map[(int)(*pos_y - (p->dir_y * fwd * movespeed))][(int)*pos_x] == 0)
+	if (map[(int)(*pos_y + (p->dir_y * fwd * movespeed))][(int)*pos_x] == 0)
 		*pos_y += p->dir_y * fwd * movespeed;
 }
 
@@ -42,7 +42,7 @@ void	player_move_ad(t_gamevars *gamevars, int fwd)
 	pos_x = &gamevars->player->pos_x;
 	pos_y = &gamevars->player->pos_y;
 	p = gamevars->player;
-	movespeed = gamevars->player->movespeed;
+	movespeed = gamevars->player->movespeed * gamevars->frametime;
 	map = gamevars->map.map;
 	if (map[(int)*pos_y][(int)(*pos_x + (p->dir_y * movespeed))] == 0)
 		*pos_x += p->dir_y * fwd * movespeed;
@@ -58,7 +58,7 @@ void	player_rotate(t_gamevars *gamevars, int dir)
 	t_player	*p;
 
 	p = gamevars->player;
-	speed = dir * p->rot_speed;
+	speed = dir * p->rot_speed * gamevars->frametime;
 	dir_x = p->dir_x;
 	dir_y = p->dir_y;
 	p->dir_x = dir_x * cos(speed) - dir_y * sin(speed);

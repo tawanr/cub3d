@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/06/10 02:34:01 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:58:13 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,14 @@ void	inithooks(void *mlx_win, t_gamevars *gamevars)
 
 void	init_player(t_player *player)
 {
-	player->pos_x = 4 - 0.5;
-	player->pos_y = 4 - 0.5;
+	player->pos_x = 15 - 0.5;
+	player->pos_y = 5 - 0.5;
 	player->dir_x = 0;
 	player->dir_y = -1;
 	player->cam_x = 1;
 	player->cam_y = 0;
-	player->movespeed = 0.05;
-	player->rot_speed = 0.05;
-}
-
-int	**init_map(void)
-{
-	int	map[MHEIGHT][MWIDTH] = {
-	{1, 1, 1, 1, 1, 1},
-	{1, 0, 0, 1, 0, 1},
-	{1, 0, 0, 0, 0, 1},
-	{1, 1, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 1}
-	};
-	int	**newMap;
-
-	newMap = (int **)malloc(MHEIGHT * sizeof(int *));
-	for (int y = 0; y < MHEIGHT; y++)
-	{
-		newMap[y] = (int *)malloc(MWIDTH * sizeof(int));
-		for (int x = 0; x < MWIDTH; x++)
-			newMap[y][x] = map[y][x];
-	}
-	return (newMap);
+	player->movespeed = 6;
+	player->rot_speed = 4;
 }
 
 void	init_minimap(t_minimap *minimap)
@@ -60,4 +39,17 @@ void	init_minimap(t_minimap *minimap)
 	minimap->pos_x = 10;
 	minimap->pos_y = 10;
 	minimap->scale = MAPSIZE / MWIDTH;
+}
+
+void	init_gamevars(t_gamevars *gamevars)
+{
+	gamevars->map.map = gamevars->map_data->map->map;
+	gamevars->map.width = gamevars->map_data->map->width;
+	gamevars->map.height = gamevars->map_data->map->height;
+	gamevars->time = gettime();
+	gamevars->input->rmouse_pressed = 0;
+	gamevars->doorcalls = (t_door **)malloc(sizeof(t_door *));
+	*gamevars->doorcalls = NULL;
+	gamevars->map.map[7][14] = 2;
+	gamevars->map.map[3][18] = 2;
 }
