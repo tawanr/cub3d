@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocess.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/08 22:09:23 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:14:22 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_map
 	int	height;
 	int	width;
 }	t_map;
-
 
 typedef struct s_preplayer
 {

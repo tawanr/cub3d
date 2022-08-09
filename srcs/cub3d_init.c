@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 22:51:51 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:06:10 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,28 @@ void	inithooks(void *mlx_win, t_gamevars *gamevars)
 	mlx_loop_hook(gamevars->mlx, drawframe, gamevars);
 }
 
-void	init_player(t_player *player)
+void	init_player(t_gamevars *gv, t_player *player)
 {
-	player->pos_x = 15 - 0.5;
-	player->pos_y = 5 - 0.5;
+	player->pos_x = gv->map_data->player->x + 0.5;
+	player->pos_y = gv->map_data->player->y + 0.5;
 	player->dir_x = 0;
-	player->dir_y = -1;
-	player->cam_x = 1;
+	player->dir_y = 0;
+	player->cam_x = 0;
 	player->cam_y = 0;
-	player->movespeed = 6;
-	player->rot_speed = 4;
+	if (gv->map_data->player->dir == 'N')
+		player->dir_y = -1;
+	else if (gv->map_data->player->dir == 'S')
+		player->dir_y = 1;
+	else if (gv->map_data->player->dir == 'W')
+		player->dir_x = -1;
+	else if (gv->map_data->player->dir == 'E')
+		player->dir_x = 1;
+	if (gv->map_data->player->dir == 'N' || gv->map_data->player->dir == 'S')
+		player->cam_x = 1;
+	else
+		player->cam_y = 1;
+	player->movespeed = 8;
+	player->rot_speed = 8;
 }
 
 void	init_minimap(t_minimap *minimap)
@@ -50,5 +62,6 @@ void	init_gamevars(t_gamevars *gamevars)
 	gamevars->input->rmouse_pressed = 0;
 	gamevars->doorcalls = (t_door **)malloc(sizeof(t_door *));
 	*gamevars->doorcalls = NULL;
-	gamevars->spriteq = (t_sprite **)malloc(sizeof(t_sprite *));
+	gamevars->objectque = (t_object **)malloc(sizeof(t_object *));
+	*gamevars->objectque = NULL;
 }

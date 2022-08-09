@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 21:03:41 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 22:31:15 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:35:12 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 	{
 		if (ray_door(gamevars, ray, map_x, map_y))
 			return (get_dis(gamevars, ray, map_x, map_y));
+		if (gamevars->map.map[map_y][map_x] == 3)
+			add_object(gamevars, map_x, map_y);
 		if (ray->side_dx < ray->side_dy)
 		{
 			ray->side_dx += ray->delta_x;

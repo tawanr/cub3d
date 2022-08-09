@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 20:53:00 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 22:25:27 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:10:59 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	mini_shift(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini)
 {
 	t_pos	p;
 	t_pos	mm;
+	int		color;
 
 	p.x = gv->player->pos_x;
 	p.y = gv->player->pos_y;
@@ -103,10 +104,8 @@ void	mini_shift(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini)
 	{
 		while (d->x < mini->pos_x + ((m->x + 1) * mini->scale) && d->x < WWIDTH)
 		{
-			if (gv->map.map[mm.y][mm.x] == 2)
-				pixel_put(gv->img, d->x++, d->y, 0x000000DD);
-			else
-				pixel_put(gv->img, d->x++, d->y, 0x00444444);
+			color = tile_color(gv->map.map[mm.y][mm.x]);
+			pixel_put(gv->img, d->x++, d->y, color);
 		}
 	}
 	else if (m->x < MWIDTH && m->y < MHEIGHT)

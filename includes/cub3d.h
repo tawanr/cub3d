@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 22:52:03 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:34:46 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define MHEIGHT 9
 # define MAPSIZE 150
 # define MMPLSIZE 3
+# define USEC 1000000
+# define BLK 0x00FFFFFF
 
 typedef struct s_data
 {
@@ -82,6 +84,12 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
+typedef struct s_fpos
+{
+	double	x;
+	double	y;
+}	t_fpos;
+
 typedef struct s_player
 {
 	double	pos_x;
@@ -114,17 +122,40 @@ typedef struct s_door
 	struct s_door	*prev;
 }	t_door;
 
-typedef struct s_sprite
+typedef struct s_object
 {
-	t_pos			pos;
-	t_texture		*textures;
+	t_fpos			pos;
+	t_texture		**textures;
 	int				frames;
-	int				scale;
+	double			scale;
 	int				animate;
 	int				visible;
 	int				time;
-	struct s_sprite	*next;
-	struct s_sprite	*prev;
+	double			ani_loop;
+	double			depth;
+	double			sx;
+	double			sy;
+	struct s_object	*next;
+	struct s_object	*prev;
+}	t_object;
+
+typedef struct s_draw
+{
+	int		height;
+	int		width;
+	int		screenx;
+	int		startx;
+	int		starty;
+	int		endx;
+	int		endy;
+	double	tx;
+	double	ty;
+}	t_draw;
+
+typedef struct s_sprite
+{
+	t_texture	**frames;
+	int			count;
 }	t_sprite;
 
 typedef struct s_gamevars
@@ -138,19 +169,20 @@ typedef struct s_gamevars
 	t_minimap	*minimap;
 	t_input		*input;
 	t_texture	textures[5];
+	t_sprite	sprite;
 	int			tex_count;
 	t_cub		*map_data;
 	int			time;
 	double		frametime;
 	t_door		**doorcalls;
-	t_sprite	**spriteq;
+	t_object	**objectque;
 	double		zd[WWIDTH];
 }	t_gamevars;
 
 // Initializations
 void			init_gamevars(t_gamevars *gamevars);
 void			inithooks(void *mlx_win, t_gamevars *gamevars);
-void			init_player(t_player *player);
+void			init_player(t_gamevars *gv, t_player *player);
 void			init_minimap(t_minimap *minimap);
 
 // Input and player movement
@@ -169,6 +201,7 @@ int				drawframe(t_gamevars *gamevars);
 void			draw_map(t_gamevars *gamevars);
 void			mini_fill(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini);
 void			mini_shift(t_gamevars *gv, t_pos *m, t_pos *d, t_minimap *mini);
+int				tile_color(int type);
 
 // Door animation
 t_door			*new_door(int map_x, int map_y);
@@ -197,9 +230,22 @@ void			draw_floor(t_gamevars *gamevars);
 // Texture handling
 int				texture_load(t_gamevars *gamevars);
 
+// Sprite handling
+int				new_sprite(t_gamevars *gv, char *path);
+int				sprite_texture(t_gamevars *gv, int frame, char *path, int pos);
+int				sprite_load(t_gamevars *gv);
+
+// Object handling
+void			add_object(t_gamevars *gv, int map_x, int map_y);
+t_object		*new_object(t_gamevars *gv, int map_x, int map_y);
+void			run_objectque(t_gamevars *gv);
+void			draw_object(t_gamevars *gv, t_object *obj);
+void			draw_obj_col(t_gamevars *gv, t_draw *s, t_object *obj, int x);
+
 // Frame time and FPS display
 unsigned int	gettime(void);
 unsigned int	getfps(t_gamevars *gamevars);
+unsigned int	difftime(unsigned int t1);
 void			display_fps(t_gamevars *gamevars);
 
 // Cleanup

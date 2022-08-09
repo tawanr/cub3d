@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 21:14:56 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:40:34 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	drawframe(t_gamevars *gamevars)
 	draw_ceiling(gamevars);
 	draw_floor(gamevars);
 	calc_ray(gamevars);
+	run_objectque(gamevars);
 	draw_map(gamevars);
 	mlx_put_image_to_window(gamevars->mlx, gamevars->mlx_win, img->img, 0, 0);
 	mlx_destroy_image(gamevars->mlx, o_img);
@@ -47,10 +48,11 @@ int	main(int argc, char **argv)
 	img.img = mlx_new_image(gamevars.mlx, WWIDTH, WHEIGHT);
 	gamevars.img = &img;
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.linelen, &img.endian);
-	init_player(&player);
 	init_minimap(&minimap);
-	gamevars.player = &player;
 	gamevars.map_data = preprocess_cub(argc, argv);
+	printf("sprite: %s\n", gamevars.map_data->sprite);
+	init_player(&gamevars, &player);
+	gamevars.player = &player;
 	texture_load(&gamevars);
 	gamevars.minimap = &minimap;
 	gamevars.input = &input;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:50:04 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/08 21:46:40 by spoolpra         ###   ########.fr       */
+/*   Updated: 2022/08/09 08:51:22 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ static int	assign_val(char c)
 {
 	if (c == '1')
 		return (WALL);
-	else if (c == '-')
+	else if (c == '2')
 		return (DOOR);
 	else if (c == ' ')
 		return (SPACE);
+	else if (c == '3')
+		return (OBJ);
 	return (EMPTY);
 }
 
@@ -50,7 +52,8 @@ int	*get_map_line(char *l, t_cub *cub, int *flag)
 			assign_player(cub, i, cub->map->height, l[i]);
 			map_line[i] = EMPTY;
 		}
-		else if (l[i] == '0' || l[i] == '1' || l[i] == '-' || l[i] == ' ')
+		else if (l[i] == '0' || l[i] == '1' || l[i] == '2' || l[i] == ' ' || \
+				l[i] == '3')
 			map_line[i] = assign_val(l[i]);
 		else if (l[i] == '!')
 			map_line[i] = OBJ;
