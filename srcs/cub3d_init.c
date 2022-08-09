@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 14:06:10 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:00:00 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	init_minimap(t_minimap *minimap)
 
 void	init_gamevars(t_gamevars *gamevars)
 {
+	int		i;
+	char	*a;
+	t_data	*img;
+
 	gamevars->map.map = gamevars->map_data->map->map;
 	gamevars->map.width = gamevars->map_data->map->width;
 	gamevars->map.height = gamevars->map_data->map->height;
@@ -64,4 +68,15 @@ void	init_gamevars(t_gamevars *gamevars)
 	*gamevars->doorcalls = NULL;
 	gamevars->objectque = (t_object **)malloc(sizeof(t_object *));
 	*gamevars->objectque = NULL;
+	gamevars->framecount = 0;
+	i = 0;
+	while (i < 2)
+	{
+		img = (t_data *)malloc(sizeof(t_data));
+		img->img = mlx_new_image(gamevars->mlx, WWIDTH, WHEIGHT);
+		a = mlx_get_data_addr(img->img, &img->bpp, &img->linelen, &img->endian);
+		img->addr = a;
+		gamevars->buffer[i++] = img;
+	}
+	gamevars->img = gamevars->buffer[0];
 }

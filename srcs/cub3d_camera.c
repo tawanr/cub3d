@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 21:03:41 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 13:35:12 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:27:18 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,7 @@ double	dda(t_gamevars *gamevars, t_ray *ray)
 			ray->side = 0;
 		}
 		else
-		{
-			ray->side_dy += ray->delta_y;
-			map_y += ray->step_y;
-			ray->count_y++;
-			ray->side = 1;
-		}
+			dda_stepy(ray, &map_y);
 	}
 	return (get_dis(gamevars, ray, map_x, map_y));
 }

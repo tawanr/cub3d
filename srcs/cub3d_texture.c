@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:57:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 14:04:10 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:10:13 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ int	texture_load(t_gamevars *gamevars)
 		time = gettime();
 		tex->img = mlx_xpm_file_to_image(gamevars->mlx,
 				path[i], &tex->width, &tex->height);
-		printf("cub3d: loaded texture: %s - %d ms\n", path[i], difftime(time));
+		printf("cub3d: loaded texture: %s - %d ms\n", path[i++], difftime(time));
 		if (!tex->img)
 			return (1);
 		tex->img->addr = mlx_get_data_addr(tex->img,
 				&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
-		i++;
 	}
 	sprite_load(gamevars);
 	return (0);

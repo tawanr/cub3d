@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 19:23:20 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 09:44:51 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:08:10 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	display_fps(t_gamevars *gamevars)
 
 	fps = getfps(gamevars);
 	str = ft_itoa(fps);
+	mlx_string_put(gamevars->mlx, gamevars->mlx_win, WWIDTH - 45, 20, 0, "FPS");
 	mlx_string_put(gamevars->mlx, gamevars->mlx_win, WWIDTH - 20, 20, 0, str);
 	free(str);
 }

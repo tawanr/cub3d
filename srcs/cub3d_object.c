@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 12:07:08 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 14:39:16 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:03:38 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,24 @@ void	run_objectque(t_gamevars *gv)
 
 void	draw_object(t_gamevars *gv, t_object *obj)
 {
-	t_player	*p;
 	t_draw		s;
 	int			col;
 
-	p = gv->player;
-	obj->depth = (p->pos_x - obj->pos.x) * (p->pos_x - obj->pos.x);
-	obj->depth += (p->pos_y - obj->pos.y) * (p->pos_y - obj->pos.y);
-	obj->sx = obj->pos.x - p->pos_x;
-	obj->sy = obj->pos.y - p->pos_y;
-	s.tx = 1.0 / (p->cam_x * p->dir_y - p->dir_x * p->cam_y);
-	s.ty = s.tx * (-p->cam_y * obj->sx + p->cam_x * obj->sy);
-	s.tx *= (p->dir_y * obj->sx - p->dir_x * obj->sy);
-	s.screenx = (int)((WWIDTH / 2) * (1 + s.tx / s.ty));
+	init_object_draw(gv, obj, &s);
 	s.height = abs((int)(WHEIGHT / s.ty));
-	s.starty = -s.height / 2 + WHEIGHT / 2;
+	s.off = (int)((1 - obj->scale) * (double)s.height);
+	s.height -= s.off;
+	s.starty = -s.height / 2 + WHEIGHT / 2 + s.off;
 	if (s.starty < 0)
 		s.starty = 0;
-	s.endy = s.height / 2 + WHEIGHT / 2;
+	s.endy = s.height / 2 + WHEIGHT / 2 + s.off;
 	if (s.endy >= WHEIGHT)
 		s.endy = WHEIGHT - 1;
-	s.width = abs((int)(WHEIGHT / s.ty));
-	s.startx = -s.width / 2 + s.screenx;
+	s.width = abs((int)(WHEIGHT / s.ty)) - s.off;
+	s.startx = -s.width / 2 + s.screenx + (s.off / 2);
 	if (s.startx < 0)
 		s.startx = 0;
-	s.endx = s.width / 2 + s.screenx;
+	s.endx = s.width / 2 + s.screenx - (s.off / 2);
 	if (s.endy >= WWIDTH)
 		s.endy = WWIDTH - 1;
 	col = s.startx;
@@ -122,20 +115,22 @@ void	draw_obj_col(t_gamevars *gv, t_draw *s, t_object *obj, int x)
 	int	color;
 	int	tex_pos;
 
-	x_off = (int)(256 * (x - (-s->width / 2 + s->screenx)) * \
-			obj->textures[obj->animate]->width / s->width) / 256 % \
+	x_off = (int)(256 * (x - (-s->width / 2 + s->screenx + (s->off / 2))) * \
+			obj->textures[obj->animate]->width / (s->width - s->off)) / 256 % \
 			obj->textures[obj->animate]->width;
 	y = s->starty;
 	while (s->ty > 0 && x > 0 && x < WWIDTH && y < s->endy)
 	{
-		y_off = y * 256 - WHEIGHT * 128 + s->height * 128;
-		y_off = ((y_off * obj->textures[obj->animate]->height) / s->height);
+		y_off = y * 256 - WHEIGHT * 128 + s->height * 128 - (s->off * 256);
+		y_off = (y_off * obj->textures[obj->animate]->height);
+		y_off /= s->height - s->off;
 		y_off /= 256;
 		tex_pos = y_off * obj->textures[obj->animate]->width * 4;
 		tex_pos += x_off * 4;
 		color = *(int *)(&obj->textures[obj->animate]->img->addr[tex_pos]);
 		if (x >= 0 && x < WWIDTH && y >= 0 && y < WHEIGHT && (color & BLK) != 0)
-			pixel_put(gv->img, x, y, color);
+			if (s->ty < gv->zd[x])
+				pixel_put(gv->img, x, y, color);
 		y++;
 	}
 }

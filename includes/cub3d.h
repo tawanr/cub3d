@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 14:34:46 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:53:47 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct s_door
 
 typedef struct s_object
 {
-	t_fpos			pos;
+	t_pos			pos;
 	t_texture		**textures;
 	int				frames;
 	double			scale;
@@ -148,6 +148,7 @@ typedef struct s_draw
 	int		starty;
 	int		endx;
 	int		endy;
+	int		off;
 	double	tx;
 	double	ty;
 }	t_draw;
@@ -164,6 +165,7 @@ typedef struct s_gamevars
 	void		*mlx;
 	void		*mlx_win;
 	t_data		*img;
+	int			framecount;
 	t_map		map;
 	t_player	*player;
 	t_minimap	*minimap;
@@ -177,6 +179,7 @@ typedef struct s_gamevars
 	t_door		**doorcalls;
 	t_object	**objectque;
 	double		zd[WWIDTH];
+	t_data		*buffer[2];
 }	t_gamevars;
 
 // Initializations
@@ -218,6 +221,7 @@ void			calc_ray(t_gamevars *gamevars);
 double			wall_distance(t_gamevars *gamevars, t_ray *ray);
 void			calc_sidedist(t_gamevars *gamevars, t_ray *ray);
 double			dda(t_gamevars *gamevars, t_ray *ray);
+void			dda_stepy(t_ray *ray, int *map_y);
 double			get_dis(t_gamevars *gamevars, t_ray *ray, int map_x, int map_y);
 int				ray_door(t_gamevars *gv, t_ray *ray, int map_x, int map_y);
 
@@ -241,6 +245,7 @@ t_object		*new_object(t_gamevars *gv, int map_x, int map_y);
 void			run_objectque(t_gamevars *gv);
 void			draw_object(t_gamevars *gv, t_object *obj);
 void			draw_obj_col(t_gamevars *gv, t_draw *s, t_object *obj, int x);
+void			init_object_draw(t_gamevars *gv, t_object *obj, t_draw *s);
 
 // Frame time and FPS display
 unsigned int	gettime(void);
@@ -251,8 +256,15 @@ void			display_fps(t_gamevars *gamevars);
 // Cleanup
 void			cleanup(t_gamevars *gamevars);
 int				end_win(t_gamevars *gamevars);
+void			clean_sprite(t_gamevars *gv);
+void			clean_textures(t_gamevars *gv);
+void			clean_doorcalls(t_gamevars *gv);
+void			clean_objque(t_gamevars *gv);
 
 // Utils
 double			dbl_abs(double n);
+
+// Error handling
+void			texture_err(void);
 
 #endif
