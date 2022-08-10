@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 09:42:15 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:31:15 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,25 @@ int	drawframe(t_gamevars *gamevars)
 {
 	t_data	*img;
 
-	gamevars->img = gamevars->buffer[gamevars->framecount];
-	img = gamevars->img;
 	player_play(gamevars);
 	check_pos(gamevars);
 	run_door(gamevars);
-	draw_ceiling(gamevars);
-	draw_floor(gamevars);
-	calc_ray(gamevars);
-	run_objectque(gamevars);
-	draw_map(gamevars);
+	if (gamevars->player->moved == 1 || *gamevars->objectque)
+	{
+		gamevars->img = gamevars->buffer[gamevars->framecount];
+		draw_ceiling(gamevars);
+		draw_floor(gamevars);
+		calc_ray(gamevars);
+		run_objectque(gamevars);
+		draw_map(gamevars);
+	}
+	img = gamevars->img;
 	mlx_put_image_to_window(gamevars->mlx, gamevars->mlx_win, img->img, 0, 0);
 	display_fps(gamevars);
-	gamevars->framecount++;
+	if (gamevars->player->moved == 1)
+		gamevars->framecount++;
 	gamevars->framecount %= 2;
+	gamevars->player->moved = 0;
 	return (0);
 }
 

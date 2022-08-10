@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 12:07:08 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 16:03:38 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 11:56:15 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	draw_object(t_gamevars *gv, t_object *obj)
 	t_draw		s;
 	int			col;
 
+	gv->player->moved = 1;
 	init_object_draw(gv, obj, &s);
 	s.height = abs((int)(WHEIGHT / s.ty));
 	s.off = (int)((1 - obj->scale) * (double)s.height);

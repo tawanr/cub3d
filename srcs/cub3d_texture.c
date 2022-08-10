@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:57:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 09:13:10 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:39:17 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	texture_load(t_gamevars *gamevars)
 				&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
 	}
 	sprite_load(gamevars);
+	gamevars->map.floor = rgb_to_int(gamevars->map_data->floor);
+	gamevars->map.ceiling = rgb_to_int(gamevars->map_data->ceiling);
 	return (0);
 }
 

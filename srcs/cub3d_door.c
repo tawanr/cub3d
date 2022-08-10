@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:52:35 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 16:38:24 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:05:34 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	run_door(t_gamevars *gv)
 	temp = *gv->doorcalls;
 	while (temp)
 	{
+		gv->player->moved = 1;
 		if (!temp->animate && !temp->opening && !temp->visible)
 		{
 			if (temp->prev)

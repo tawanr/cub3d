@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 09:51:41 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:23:32 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_fpos
 
 typedef struct s_player
 {
+	int		moved;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -105,6 +106,7 @@ typedef struct s_player
 
 typedef struct s_input
 {
+	int	mouse_cam;
 	int	mouse_pressed;
 	int	rmouse_pressed;
 	int	mouse_x;
@@ -170,27 +172,33 @@ typedef struct s_sprite
 	int			count;
 }	t_sprite;
 
+typedef struct s_debug
+{
+	int	border;
+}	t_debug;
+
 typedef struct s_gamevars
 {
 	int			scale;
+	int			tex_count;
+	int			time;
+	int			framecount;
 	void		*mlx;
 	void		*mlx_win;
-	t_data		*img;
-	int			framecount;
+	double		frametime;
+	double		zd[WWIDTH];
 	t_map		map;
+	t_cub		*map_data;
+	t_data		*img;
+	t_data		*buffer[2];
 	t_player	*player;
 	t_minimap	*minimap;
 	t_input		*input;
 	t_texture	textures[5];
 	t_sprite	sprite;
-	int			tex_count;
-	t_cub		*map_data;
-	int			time;
-	double		frametime;
 	t_door		**doorcalls;
 	t_object	**objectque;
-	double		zd[WWIDTH];
-	t_data		*buffer[2];
+	t_debug		debug;
 }	t_gamevars;
 
 // Initializations
@@ -199,6 +207,7 @@ void			inithooks(void *mlx_win, t_gamevars *gamevars);
 void			init_player(t_gamevars *gv, t_player *player);
 void			init_minimap(t_minimap *minimap);
 void			init_keys(t_gamevars *gv);
+void			init_debug(t_gamevars *gv);
 
 // Input and player movement
 void			player_play(t_gamevars *gv);
@@ -214,6 +223,7 @@ int				keypress_cont(int keycode, t_gamevars *gv);
 int				keyrelease(int keycode, t_gamevars *gv);
 int				keyrelease_cont(int keycode, t_gamevars *gv);
 void			check_pos(t_gamevars *gv);
+int				mousetrack(t_gamevars *gv);
 
 // Minimap handling
 void			draw_grid(t_gamevars *gv, t_minimap *m);
@@ -249,6 +259,9 @@ void			draw_wall_col(t_gamevars *gamevars, int x, t_ray *ray);
 void			draw_ceiling(t_gamevars *gamevars);
 void			draw_floor(t_gamevars *gamevars);
 
+// Debug functions
+int				check_border(double x_off, double tex_pos, int *color, int b);
+
 // Texture handling
 int				texture_load(t_gamevars *gamevars);
 void			assign_textures(t_gamevars *gv, char **path);
@@ -282,6 +295,7 @@ void			clean_objque(t_gamevars *gv);
 
 // Utils
 double			dbl_abs(double n);
+int				rgb_to_int(t_rgb *rgb);
 
 // Error handling
 void			texture_err(void);

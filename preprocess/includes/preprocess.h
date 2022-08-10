@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:33:29 by spoolpra          #+#    #+#             */
-/*   Updated: 2022/08/09 09:14:22 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:35:14 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_map
 	int	**map;
 	int	height;
 	int	width;
+	int	floor;
+	int	ceiling;
 }	t_map;
 
 typedef struct s_preplayer

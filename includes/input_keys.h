@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 21:51:00 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/08 22:05:26 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:01:49 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 #  define KEY_ESC 53
 #  define MSE_LEFT 1
 #  define MSE_RIGHT 2
+#  define KEY_B 11
+#  define KEY_C 8
+#  define KEY_V 9
 # else
 #  define KEY_D 100
 #  define KEY_A 97
@@ -41,6 +44,9 @@
 #  define KEY_ESC 65307
 #  define MSE_LEFT 1
 #  define MSE_RIGHT 3
+#  define KEY_B 98
+#  define KEY_C 99
+#  define KEY_V 118
 # endif
 
 #endif

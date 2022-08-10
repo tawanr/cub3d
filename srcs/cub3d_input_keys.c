@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:28:36 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 09:47:43 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:25:18 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ int	keypress_cont(int keycode, t_gamevars *gv)
 		gv->input->q_down = 1;
 	else if (keycode == KEY_E)
 		gv->input->e_down = 1;
+	else if (keycode == KEY_B)
+	{
+		gv->debug.border = !gv->debug.border;
+		gv->player->moved = 1;
+	}
+	else if (keycode == KEY_C)
+		gv->input->mouse_cam = !gv->input->mouse_cam;
 	return (0);
 }
 

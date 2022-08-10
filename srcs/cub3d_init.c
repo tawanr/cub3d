@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 09:51:30 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:31:25 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	init_player(t_gamevars *gv, t_player *player)
 		player->cam_y = 1;
 	player->movespeed = 5;
 	player->rot_speed = 5;
+	player->moved = 1;
+	player->last_pos.x = player->pos_x;
+	player->last_pos.y = player->pos_y;
 }
 
 void	init_minimap(t_minimap *minimap)
@@ -68,6 +71,7 @@ void	init_keys(t_gamevars *gv)
 	gv->input->e_down = 0;
 	gv->input->mouse_pressed = 0;
 	gv->input->rmouse_pressed = 0;
+	gv->input->mouse_cam = 0;
 }
 
 void	init_gamevars(t_gamevars *gamevars)
@@ -80,7 +84,7 @@ void	init_gamevars(t_gamevars *gamevars)
 	gamevars->map.width = gamevars->map_data->map->width;
 	gamevars->map.height = gamevars->map_data->map->height;
 	gamevars->time = gettime();
-	gamevars->input->rmouse_pressed = 0;
+	init_debug(gamevars);
 	gamevars->doorcalls = (t_door **)malloc(sizeof(t_door *));
 	*gamevars->doorcalls = NULL;
 	gamevars->objectque = (t_object **)malloc(sizeof(t_object *));
