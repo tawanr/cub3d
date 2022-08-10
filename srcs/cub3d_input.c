@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:46:20 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 13:29:14 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:10:25 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ int	mouserel(int button, int x, int y, t_gamevars *gamevars)
 
 int	mouserot(int x, int y, t_gamevars *gamevars)
 {
+	double	rate;
+
+	rate = ((double)gamevars->player->rot_speed / 1000) / gamevars->frametime;
 	if (gamevars->input->rmouse_pressed == 0)
 		return (0);
 	if (gamevars->input->rmouse_pressed)
 	{
-		player_rotate(gamevars, 0.1 * (x - gamevars->input->mouse_x));
+		player_rotate(gamevars, rate * (x - gamevars->input->mouse_x));
 		gamevars->input->mouse_x = x;
 		gamevars->input->mouse_y = y;
 	}

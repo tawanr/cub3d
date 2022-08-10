@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 13:31:15 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:58:26 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 	init_player(&gamevars, &player);
 	gamevars.player = &player;
 	if (texture_load(&gamevars))
-		texture_err();
+		return (cleanup_err(&gamevars));
 	gamevars.minimap = &minimap;
 	gamevars.input = &input;
 	init_gamevars(&gamevars);

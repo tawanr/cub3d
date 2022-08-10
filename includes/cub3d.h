@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 13:23:32 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:13:54 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ int				check_border(double x_off, double tex_pos, int *color, int b);
 // Texture handling
 int				texture_load(t_gamevars *gamevars);
 void			assign_textures(t_gamevars *gv, char **path);
+int				texture_file(t_gamevars *gv, t_texture *tex, char *path, int i);
 
 // Sprite handling
 int				new_sprite(t_gamevars *gv, char *path);
@@ -288,8 +289,8 @@ void			display_fps(t_gamevars *gamevars);
 // Cleanup
 void			cleanup(t_gamevars *gamevars);
 int				end_win(t_gamevars *gamevars);
-void			clean_sprite(t_gamevars *gv);
-void			clean_textures(t_gamevars *gv);
+void			clean_sprite(t_gamevars *gv, int couunt);
+void			clean_textures(t_gamevars *gv, int count);
 void			clean_doorcalls(t_gamevars *gv);
 void			clean_objque(t_gamevars *gv);
 
@@ -298,6 +299,8 @@ double			dbl_abs(double n);
 int				rgb_to_int(t_rgb *rgb);
 
 // Error handling
-void			texture_err(void);
+int				texture_err(t_gamevars *gv, int loaded);
+int				sprite_err(t_gamevars *gv, int frame, char *path);
+int				cleanup_err(t_gamevars *gv);
 
 #endif
