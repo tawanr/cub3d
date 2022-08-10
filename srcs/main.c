@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:22:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 17:13:43 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:42:15 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	drawframe(t_gamevars *gamevars)
 
 	gamevars->img = gamevars->buffer[gamevars->framecount];
 	img = gamevars->img;
+	player_play(gamevars);
+	check_pos(gamevars);
 	run_door(gamevars);
 	draw_ceiling(gamevars);
 	draw_floor(gamevars);

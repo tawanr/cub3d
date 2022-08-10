@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 02:34:12 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 17:27:17 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:10:13 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	clean_textures(t_gamevars *gv)
 	i = 0;
 	while (i < count)
 	{
-		free(gv->textures[i].img->img);
+		mlx_destroy_image(gv->mlx, gv->textures[i].img->img);
 		free(gv->textures[i++].img);
 	}
 }
@@ -49,7 +49,7 @@ void	clean_sprite(t_gamevars *gv)
 	count = gv->sprite.count;
 	while (i < count)
 	{
-		free(gv->sprite.frames[i]->img->img);
+		mlx_destroy_image(gv->mlx, gv->sprite.frames[i]->img->img);
 		free(gv->sprite.frames[i]->img);
 		free(gv->sprite.frames[i++]);
 	}

@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 16:53:47 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:51:41 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_player
 	double	cam_y;
 	double	movespeed;
 	double	rot_speed;
+	t_fpos	last_pos;
 }	t_player;
 
 typedef struct s_input
@@ -108,6 +109,16 @@ typedef struct s_input
 	int	rmouse_pressed;
 	int	mouse_x;
 	int	mouse_y;
+	int	w_down;
+	int	a_down;
+	int	s_down;
+	int	d_down;
+	int	up_down;
+	int	left_down;
+	int	down_down;
+	int	right_down;
+	int	q_down;
+	int	e_down;
 }	t_input;
 
 typedef struct s_door
@@ -187,8 +198,10 @@ void			init_gamevars(t_gamevars *gamevars);
 void			inithooks(void *mlx_win, t_gamevars *gamevars);
 void			init_player(t_gamevars *gv, t_player *player);
 void			init_minimap(t_minimap *minimap);
+void			init_keys(t_gamevars *gv);
 
 // Input and player movement
+void			player_play(t_gamevars *gv);
 int				mousectl(int button, int x, int y, t_gamevars *gamevars);
 int				mouserel(int button, int x, int y, t_gamevars *gamevars);
 int				mouserot(int x, int y, t_gamevars *gamevars);
@@ -196,6 +209,11 @@ int				keymod(int keycode, t_gamevars *gamevars);
 void			player_move_ad(t_gamevars *gamevars, int fwd);
 void			player_move_ws(t_gamevars *gamevars, int fwd);
 void			player_rotate(t_gamevars *gamevars, int dir);
+int				keypress(int keycode, t_gamevars *gv);
+int				keypress_cont(int keycode, t_gamevars *gv);
+int				keyrelease(int keycode, t_gamevars *gv);
+int				keyrelease_cont(int keycode, t_gamevars *gv);
+void			check_pos(t_gamevars *gv);
 
 // Minimap handling
 void			draw_grid(t_gamevars *gv, t_minimap *m);
@@ -233,6 +251,7 @@ void			draw_floor(t_gamevars *gamevars);
 
 // Texture handling
 int				texture_load(t_gamevars *gamevars);
+void			assign_textures(t_gamevars *gv, char **path);
 
 // Sprite handling
 int				new_sprite(t_gamevars *gv, char *path);

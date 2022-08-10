@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:14:55 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 16:20:48 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:09:09 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int	sprite_texture(t_gamevars *gv, int frame, char *path, int pos)
 	tex = (t_texture *)malloc(sizeof(t_texture));
 	path[pos] = frame + '0';
 	time = gettime();
-	tex->img = mlx_xpm_file_to_image(gv->mlx, path, &tex->width, &tex->height);
+	tex->img = (t_data *)malloc(sizeof(t_data));
+	tex->img->img = mlx_xpm_file_to_image(gv->mlx, path,
+			&tex->width, &tex->height);
 	printf("cub3d: loaded sprite: %s - %d ms\n", path, difftime(time));
-	if (!tex->img)
+	if (!tex->img || !tex->img->img)
 		return (-1);
-	tex->img->addr = mlx_get_data_addr(tex->img, \
+	tex->img->addr = mlx_get_data_addr(tex->img->img, \
 			&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
 	if (frame == gv->sprite.count - 1)
 		free(path);

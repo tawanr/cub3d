@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:42:30 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 15:00:00 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:51:30 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	inithooks(void *mlx_win, t_gamevars *gamevars)
 {
-	mlx_hook(mlx_win, 2, 1L << 0, keymod, gamevars);
+	mlx_hook(mlx_win, 2, 1L << 0, keypress, gamevars);
+	mlx_hook(mlx_win, 3, 1L << 1, keyrelease, gamevars);
 	mlx_hook(mlx_win, 6, 1L << 6, mouserot, gamevars);
 	mlx_hook(mlx_win, 4, 1L << 2, mousectl, gamevars);
 	mlx_hook(mlx_win, 5, 1L << 3, mouserel, gamevars);
@@ -42,8 +43,8 @@ void	init_player(t_gamevars *gv, t_player *player)
 		player->cam_x = 1;
 	else
 		player->cam_y = 1;
-	player->movespeed = 8;
-	player->rot_speed = 8;
+	player->movespeed = 5;
+	player->rot_speed = 5;
 }
 
 void	init_minimap(t_minimap *minimap)
@@ -51,6 +52,22 @@ void	init_minimap(t_minimap *minimap)
 	minimap->pos_x = 10;
 	minimap->pos_y = 10;
 	minimap->scale = MAPSIZE / MWIDTH;
+}
+
+void	init_keys(t_gamevars *gv)
+{
+	gv->input->w_down = 0;
+	gv->input->a_down = 0;
+	gv->input->s_down = 0;
+	gv->input->d_down = 0;
+	gv->input->left_down = 0;
+	gv->input->right_down = 0;
+	gv->input->up_down = 0;
+	gv->input->down_down = 0;
+	gv->input->q_down = 0;
+	gv->input->e_down = 0;
+	gv->input->mouse_pressed = 0;
+	gv->input->rmouse_pressed = 0;
 }
 
 void	init_gamevars(t_gamevars *gamevars)
@@ -79,4 +96,5 @@ void	init_gamevars(t_gamevars *gamevars)
 		gamevars->buffer[i++] = img;
 	}
 	gamevars->img = gamevars->buffer[0];
+	init_keys(gamevars);
 }

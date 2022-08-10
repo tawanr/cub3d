@@ -6,7 +6,7 @@
 /*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:57:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 16:10:13 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/10 09:13:10 by tratanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,32 @@ int	texture_load(t_gamevars *gamevars)
 	t_texture		*tex;
 	unsigned int	time;
 
+	assign_textures(gamevars, path);
 	i = 0;
-	path[0] = gamevars->map_data->north;
-	path[1] = gamevars->map_data->south;
-	path[2] = gamevars->map_data->west;
-	path[3] = gamevars->map_data->east;
-	path[4] = gamevars->map_data->door;
 	while (i < 5)
 	{
 		tex = &gamevars->textures[i];
 		time = gettime();
-		tex->img = mlx_xpm_file_to_image(gamevars->mlx,
+		tex->img = (t_data *)malloc(sizeof(t_data));
+		tex->img->img = mlx_xpm_file_to_image(gamevars->mlx,
 				path[i], &tex->width, &tex->height);
 		printf("cub3d: loaded texture: %s - %d ms\n", path[i++], difftime(time));
-		if (!tex->img)
+		if (!tex->img || !tex->img->img)
 			return (1);
-		tex->img->addr = mlx_get_data_addr(tex->img,
+		tex->img->addr = mlx_get_data_addr(tex->img->img,
 				&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
 	}
 	sprite_load(gamevars);
 	return (0);
+}
+
+void	assign_textures(t_gamevars *gv, char **path)
+{
+	path[0] = gv->map_data->north;
+	path[1] = gv->map_data->south;
+	path[2] = gv->map_data->west;
+	path[3] = gv->map_data->east;
+	path[4] = gv->map_data->door;
 }
 
 int	sprite_load(t_gamevars *gv)
