@@ -6,7 +6,7 @@
 #    By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:41:23 by spoolpra          #+#    #+#              #
-#    Updated: 2022/08/08 22:07:40 by spoolpra         ###   ########.fr        #
+#    Updated: 2022/08/11 10:45:54 by spoolpra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(NAME): $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< $(INCS) -lft -o $@ -L$(LIB_DIR) -lft
+	$(CC) $(CFLAGS) -c $< $(INCS) -o $@
 
 clean:
 	$(RM) $(OBJ_DIR)

@@ -1,17 +1,29 @@
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
-	MLX_DIR = minilibx-macos
+	MLX_DIR = minilibx_macos
 else
 	MLX_DIR = minilibx-linux
 endif
 
 LIBFT_DIR = libft
 
-SRCS = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c \
+SRCS_LINUX = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c \
 		cub3d_clean.c cub3d_texture.c cub3d_door.c cub3d_frametime.c cub3d_minimap.c \
 		cub3d_utils.c cub3d_door_utils.c cub3d_minimap_utils.c cub3d_sprite.c \
 		cub3d_object.c cub3d_object_utils.c cub3d_error.c cub3d_camera_utils.c \
 		cub3d_clean2.c cub3d_input_keys.c cub3d_debug.c
+
+SRCS_MAC = main.c cub3d_init.c cub3d_input.c cub3d_player.c cub3d_camera.c cub3d_draw.c \
+		cub3d_clean_macos.c cub3d_texture.c cub3d_door.c cub3d_frametime.c cub3d_minimap.c \
+		cub3d_utils.c cub3d_door_utils.c cub3d_minimap_utils.c cub3d_sprite.c \
+		cub3d_object.c cub3d_object_utils.c cub3d_error_macos.c cub3d_camera_utils.c \
+		cub3d_clean2.c cub3d_input_keys.c cub3d_debug.c
+
+ifeq ($(UNAME_S), Darwin)
+	SRCS = $(SRCS_MAC)
+else
+	SRCS = $(SRCS_LINUX)
+endif
 
 SRC_DIR = srcs/
 OBJS = $(SRCS:.c=.o)

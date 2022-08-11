@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:57:01 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 15:13:28 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:41:24 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	texture_load(t_gamevars *gamevars)
 		time = gettime();
 		if (texture_file(gamevars, tex, path[i], i))
 			return (-1);
-		printf("cub3d: loaded texture: %s - %d ms\n", path[i++], difftime(time));
+		printf("cub3d: loaded texture: %s - %d ms\n", path[i++], ft_difftime(time));
 		tex->img->addr = mlx_get_data_addr(tex->img->img,
 				&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
 	}

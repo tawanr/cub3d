@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_frametime.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 19:23:20 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/09 16:08:10 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:41:24 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	display_fps(t_gamevars *gamevars)
 	free(str);
 }
 
-unsigned int	difftime(unsigned int t1)
+unsigned int	ft_difftime(unsigned int t1)
 {
 	int	time;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:24:18 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 15:13:54 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:41:24 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ void			init_object_draw(t_gamevars *gv, t_object *obj, t_draw *s);
 // Frame time and FPS display
 unsigned int	gettime(void);
 unsigned int	getfps(t_gamevars *gamevars);
-unsigned int	difftime(unsigned int t1);
+unsigned int	ft_difftime(unsigned int t1);
 void			display_fps(t_gamevars *gamevars);
 
 // Cleanup

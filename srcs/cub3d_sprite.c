@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tratanat <tawan.rtn@gmail.com>             +#+  +:+       +#+        */
+/*   By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:14:55 by tratanat          #+#    #+#             */
-/*   Updated: 2022/08/10 15:13:09 by tratanat         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:41:24 by spoolpra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	sprite_texture(t_gamevars *gv, int frame, char *path, int pos)
 		free(tex);
 		return (-1);
 	}
-	printf("cub3d: loaded sprite: %s - %d ms\n", path, difftime(time));
+	printf("cub3d: loaded sprite: %s - %d ms\n", path, ft_difftime(time));
 	tex->img->addr = mlx_get_data_addr(tex->img->img, \
 			&tex->img->bpp, &tex->img->linelen, &tex->img->endian);
 	if (frame == gv->sprite.count - 1)
